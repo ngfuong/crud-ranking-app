@@ -1,0 +1,78 @@
+/* Style for mainwindow START */
+    #MainWindow {
+        background-color: #33658a;
+    }
+/* ==============END==========*/
+
+
+/* Style for menu toggle button START*/
+    #toggleButton {
+        background-color: #313a46;
+        width: 50px;
+        color: #fff;
+    }
+/* ==============END==========*/
+
+/* Style for header widget START */
+    #header {
+        background-color: #313a46;;
+    }
+/* ==============END==========*/
+
+/* Style for menu with icon only START*/
+    /* for widget */
+    #leftMenu {
+        background-color: #313a46;
+        width: 50px;
+    }
+    
+    /* style for QPushButton, QLabel */
+    #leftMenu QToolButton, QLabel {
+        height: 50px;
+        border: none;
+        font-family: 'Soliden Trial';
+        font-weight: 700;
+        color: #fff;
+        /* border-radius: 3px; */
+        /* text-align: left; */
+        /* padding: 8px 0 8px 15px; */
+        /* border-bottom: 1px solid #b0b0b0; */
+    }
+    
+    #leftMenu QToolButton:hover {
+        color: #fff;
+        background-color: rgba(86, 101, 115, 0.5);
+    }
+   
+    #leftMenu QToolButton:checked {
+        background-color: rgba(86, 101, 115, 0.5);
+    }
+
+    /* style for logo image */
+    #logoLabel_1 {
+        padding: 5px;
+    }
+/* ==============END==========*/
+    
+
+/* Style for search bar START*/
+    #searchButton {
+        border: none;
+    }
+
+    #searchInput {
+        border: none;
+        padding: 5px 10px;
+        background-color: #788596;
+    }
+
+    #searchInput:focus {
+        background-color: #404c5c;
+    }
+/* ==============END==========*/
+
+/* Style for user information button */
+    #userButton {
+        border: none;
+    }
+
