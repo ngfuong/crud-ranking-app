@@ -1,6 +1,10 @@
 from main import MainWindow
 from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QEasingCurve
 
+from PyQt6.QtGui import QColor, QPixmap, QPainter
+from PyQt6 import QtSvg
+from PyQt6.QtCore import Qt
+
 from .ui_config import UIConfig
 
 class UIFunctions(MainWindow):
@@ -30,3 +34,24 @@ class UIFunctions(MainWindow):
         if enabled:
             # GET WIDTH
             width = self.ui.extraLeftBox.width()
+
+    # Change color of svg icons
+"""
+
+    def change_icon_color(widget, color):
+        color = Qt.GlobalColor.white
+        new_pixmap = svg_to_pixmap(widget.fileName, widget.width(), widget.height(), background_color=color)
+        widget.setPixmap(new_pixmap)
+
+def paint_pixmap(old_pixmap, width, height, background_color):
+    # renderer = QtSvg.QSvgRenderer(svg_filename)
+    # pixmap = QPixmap(width, height)
+    # pixmap.fill(Qt.GlobalColor.transparent)
+    painter = QPainter(old_pixmap)
+    renderer.render(painter)
+    painter.setCompositionMode(painter.CompositionMode.CompositionMode_SourceIn)
+    if background_color:
+        painter.fillRect(pixmap.rect(), background_color)
+    painter.end()
+    return pixmap
+"""

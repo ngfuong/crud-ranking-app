@@ -79,26 +79,62 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="toggleButton">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>../icons/header/bars-solid.svg</normaloff>../icons/header/bars-solid.svg</iconset>
-            </property>
-            <property name="iconSize">
+           <widget class="QFrame" name="frame_3">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>20</height>
+              <width>50</width>
+              <height>50</height>
              </size>
             </property>
-            <property name="checkable">
-             <bool>true</bool>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
             </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="toggleButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../icons/header/bars-solid.svg</normaloff>../icons/header/bars-solid.svg</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
@@ -168,20 +204,50 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="userButton">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>../icons/header/user-solid.svg</normaloff>../icons/header/user-solid.svg</iconset>
-            </property>
-            <property name="iconSize">
+           <widget class="QFrame" name="frame_4">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>20</height>
+              <width>50</width>
+              <height>50</height>
              </size>
             </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="userButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../icons/header/user-solid.svg</normaloff>../icons/header/user-solid.svg</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
@@ -377,6 +443,12 @@
         <widget class="QFrame" name="frame">
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
            <number>9</number>
           </property>
           <item>
@@ -390,7 +462,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>45</height>
+              <height>50</height>
              </size>
             </property>
             <property name="cursor">
@@ -401,7 +473,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>sidebar/house-solid.svg</normaloff>sidebar/house-solid.svg</iconset>
+              <normaloff>sidebar/house-solid-f26419.svg</normaloff>sidebar/house-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -431,7 +503,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>45</height>
+              <height>50</height>
              </size>
             </property>
             <property name="cursor">
@@ -442,7 +514,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../icons/sidebar/tv-solid.svg</normaloff>../icons/sidebar/tv-solid.svg</iconset>
+              <normaloff>sidebar/tv-solid-f26419.svg</normaloff>sidebar/tv-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -472,7 +544,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>45</height>
+              <height>50</height>
              </size>
             </property>
             <property name="cursor">
@@ -483,7 +555,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../icons/sidebar/film-solid.svg</normaloff>../icons/sidebar/film-solid.svg</iconset>
+              <normaloff>sidebar/film-solid-f26419.svg</normaloff>sidebar/film-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -513,7 +585,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>45</height>
+              <height>50</height>
              </size>
             </property>
             <property name="cursor">
@@ -524,7 +596,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../icons/sidebar/ranking-star-solid.svg</normaloff>../icons/sidebar/ranking-star-solid.svg</iconset>
+              <normaloff>sidebar/ranking-star-solid-f26419.svg</normaloff>sidebar/ranking-star-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -568,6 +640,15 @@
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>9</number>
+          </property>
           <item>
            <widget class="QToolButton" name="exitButton_1">
             <property name="sizePolicy">
@@ -579,7 +660,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>45</height>
+              <height>50</height>
              </size>
             </property>
             <property name="cursor">
@@ -590,7 +671,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../icons/sidebar/right-from-bracket-solid.svg</normaloff>../icons/sidebar/right-from-bracket-solid.svg</iconset>
+              <normaloff>sidebar/right-from-bracket-solid-f26419.svg</normaloff>sidebar/right-from-bracket-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>

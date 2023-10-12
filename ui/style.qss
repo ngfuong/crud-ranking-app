@@ -1,28 +1,29 @@
 /* Style for mainwindow START */
     #MainWindow {
-        background-color: #33658a;
+        background-color: #e4e4e4;
     }
 /* ==============END==========*/
 
 
 /* Style for menu toggle button START*/
     #toggleButton {
-        background-color: #313a46;
+        /* background-color: #313a46; */
         width: 50px;
-        color: #fff;
+        border: none;
+
     }
 /* ==============END==========*/
 
 /* Style for header widget START */
     #header {
-        background-color: #313a46;;
+        background-color: #d9d9d9;;
     }
 /* ==============END==========*/
 
 /* Style for menu with icon only START*/
     /* for widget */
     #leftMenu {
-        background-color: #313a46;
+        background-color: #e4e4e4;
         width: 50px;
     }
     
@@ -31,8 +32,8 @@
         height: 50px;
         border: none;
         font-family: 'Soliden Trial';
-        font-weight: 700;
-        color: #fff;
+        font-weight: 600;
+        color: #f26419;
         /* border-radius: 3px; */
         /* text-align: left; */
         /* padding: 8px 0 8px 15px; */
@@ -61,7 +62,7 @@
     }
 
     #searchInput {
-        border: none;
+        border-radius: 15px;
         padding: 5px 10px;
         background-color: #788596;
     }

@@ -26,6 +26,8 @@ class MainWindow(QMainWindow):
         # UI: Toggle menu
         widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggle_menu(self, enabled=True))
 
+        # UIFunctions.change_icon_color(self.ui.homeButton_1, "blue")
+
     
 
 
