@@ -1,9 +1,9 @@
 from main import MainWindow
 from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QEasingCurve
 
-from PyQt6.QtGui import QColor, QPixmap, QPainter
+from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon
 from PyQt6 import QtSvg
-from PyQt6.QtCore import Qt
+# from PyQt6.QtCore import
 
 from .ui_config import UIConfig
 
@@ -18,6 +18,7 @@ class UIFunctions(MainWindow):
             # SET MAX WIDTH
             if width == UIConfig.MENU_COLLAPSED_WIDTH:
                 widthExtended = maxExtend
+                self.ui.logoLabel_3.show()
             else:
                 widthExtended = standard
                 self.ui.logoLabel_3.hide()
@@ -34,9 +35,23 @@ class UIFunctions(MainWindow):
         if enabled:
             # GET WIDTH
             width = self.ui.extraLeftBox.width()
+    
+    def toggleButtonMousePressed(self, pressed=False):
+        icon = QIcon()
+        if pressed:
+            icon.addPixmap(QPixmap("ui/sidebar/bars-solid-f26419.svg"))
+            self.toggleButtonPressed = False 
+        else:
+            icon.addPixmap(QPixmap("ui/sidebar/x-solid-f26419.svg"))
+            self.toggleButtonPressed = True 
+        self.ui.toggleButton.setIcon(icon)
 
-    # Change color of svg icons
+    # CRUD APPLICATIONS
+    # def show_add_menu(self):
+    #     msg = QMessageBox
+
 """
+    # Change color of svg icons
 
     def change_icon_color(widget, color):
         color = Qt.GlobalColor.white

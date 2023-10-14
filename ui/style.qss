@@ -10,20 +10,44 @@
         /* background-color: #313a46; */
         width: 50px;
         border: none;
-
     }
+    /* #toggleButton QPushButton:checked {
+        qproperty-icon: "ui/sidebar/x-solid-f26419.svg"
+    } */
 /* ==============END==========*/
 
 /* Style for header widget START */
-    #header {
-        background-color: #d9d9d9;;
+    #widget {
+        background-color: #f26419;;
+    }
+/* ==============END==========*/
+
+/* Style for search bar START*/
+    #searchButton {
+        border: none;
+    }
+
+    #searchInput {
+        border-radius: 15%;
+        padding: 5px 10px;
+        background-color: #e4e4e4;
+    }
+
+    #searchInput:focus {
+        background-color: #fff;
+    }
+/* ==============END==========*/
+
+/* Style for user information button */
+    #userButton {
+        border: none;
     }
 /* ==============END==========*/
 
 /* Style for menu with icon only START*/
     /* for widget */
     #leftMenu {
-        background-color: #e4e4e4;
+        background-color: #fff;
         width: 50px;
     }
     
@@ -32,21 +56,30 @@
         height: 50px;
         border: none;
         font-family: 'Soliden Trial';
-        font-weight: 600;
+        font-weight: 700;
         color: #f26419;
+        padding: 8px;
         /* border-radius: 3px; */
         /* text-align: left; */
-        /* padding: 8px 0 8px 15px; */
         /* border-bottom: 1px solid #b0b0b0; */
     }
+
+    /* #leftMenu QToolButton .text {
+        padding-top: 5px;
+    } */
     
     #leftMenu QToolButton:hover {
         color: #fff;
-        background-color: rgba(86, 101, 115, 0.5);
+        /* border-radius: 15%; */
+        /* background-color: #b9b9b9; */
+        /* padding: 8px 0 8px 15px; */
     }
    
     #leftMenu QToolButton:checked {
-        background-color: rgba(86, 101, 115, 0.5);
+        color: #fff;
+        /* border-radius: 15%; */
+        /* padding: 8px 0 8px 15px; */
+        /* background-color: #b9b9b9;  */
     }
 
     /* style for logo image */
@@ -55,25 +88,18 @@
     }
 /* ==============END==========*/
     
-
-/* Style for search bar START*/
-    #searchButton {
-        border: none;
+/* Ranking page Widget START */
+    #listWidget {
+        border-radius: 10%;
     }
 
-    #searchInput {
-        border-radius: 15px;
-        padding: 5px 10px;
-        background-color: #788596;
-    }
-
-    #searchInput:focus {
-        background-color: #404c5c;
-    }
 /* ==============END==========*/
 
-/* Style for user information button */
-    #userButton {
+    #manageMenu QPushButton {
+        color: #fff;
+        background-color: #f26419;
+        font-family: 'Soliden Trial';
+        font-weight: 600;
         border: none;
+        padding: 2px;
     }
-
