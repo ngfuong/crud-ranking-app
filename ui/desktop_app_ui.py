@@ -127,10 +127,6 @@ class Ui_MainWindow(object):
         self.removeButton.setMinimumSize(QtCore.QSize(80, 0))
         self.removeButton.setObjectName("removeButton")
         self.horizontalLayout_6.addWidget(self.removeButton)
-        self.updateDataButton = QtWidgets.QPushButton(parent=self.manageMenu)
-        self.updateDataButton.setMinimumSize(QtCore.QSize(100, 0))
-        self.updateDataButton.setObjectName("updateDataButton")
-        self.horizontalLayout_6.addWidget(self.updateDataButton)
         self.gridLayout_4.addWidget(self.manageMenu, 1, 0, 1, 1)
         self.animeList = QtWidgets.QListWidget(parent=self.moviesPage)
         self.animeList.setObjectName("animeList")
@@ -341,7 +337,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -354,7 +350,6 @@ class Ui_MainWindow(object):
         self.addButton.setText(_translate("MainWindow", "ADD"))
         self.editButton.setText(_translate("MainWindow", "EDIT"))
         self.removeButton.setText(_translate("MainWindow", "DELETE"))
-        self.updateDataButton.setText(_translate("MainWindow", "UPDATE DATA"))
         self.animeView1.setText(_translate("MainWindow", "TextLabel"))
         self.animeView2.setText(_translate("MainWindow", "TextLabel"))
         self.animeView3.setText(_translate("MainWindow", "TextLabel"))

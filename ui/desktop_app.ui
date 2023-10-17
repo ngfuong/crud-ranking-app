@@ -188,7 +188,7 @@
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>3</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="homePage">
         <layout class="QGridLayout" name="gridLayout_2">
@@ -302,19 +302,6 @@
               </property>
               <property name="text">
                <string>DELETE</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="updateDataButton">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>UPDATE DATA</string>
               </property>
              </widget>
             </item>

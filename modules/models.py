@@ -9,8 +9,15 @@ class AnimeItem:
         self.image = image
         self.rating = rating
 
-    def __str__(self):
-        return f"{self.title}\t{self.release_date}\t{self.image==True}\t{self.rating}"
+    # def __str__(self):
+    #     return f"{self.title}\t{self.release_date}\t{self.image==True}\t{self.rating}"
+    
+    def update(self, new_data):
+        # Empty field is not updated
+        for k, v in new_data.items():
+            if v:
+                setattr(self, k, v)
+        
 
 JSON_PATH = 'data/data.json'
 """
@@ -26,11 +33,17 @@ data.json item example
 class AnimeDatabase:
     def __init__(self):
         self.anime_item_list = list()
-        self.anime_dict_list = AnimeDatabase.__load_json_data()
+        self.anime_dict_data = AnimeDatabase.__load_json_data()
         self.anime_title_list = self.get_title_list()
     
+    def item_to_data(self):
+        json_data = list()
+        for anime in self.anime_item_list:
+            json_data.append(anime.__dict__)
+        return json_data
+
     def load_data(self):
-        for anime_dict in self.anime_dict_list:
+        for anime_dict in self.anime_dict_data:
             anime = AnimeItem(id=anime_dict["id"],
                           title=anime_dict["title"],
                           release_date=anime_dict["release_date"],
@@ -38,41 +51,49 @@ class AnimeDatabase:
                           rating=anime_dict["rating"])
             self.anime_item_list.append(anime)
 
-    def get_item_by_title(self, anime_title):
+    def get_item_by_title(self, anime_title) -> AnimeItem:
         for anime_item in self.anime_item_list:
             if anime_item.title == anime_title:
                 return anime_item
 
-    def add_item(self, anime):
-        self.anime_data = self.anime_data.append(anime)
-        AnimeDatabase.__write_json_data(self.anime_data)
-
-    # def add_new_anime(self):
-    #     new_title = input("Input anime title: ")
-    #     new_release_date = datetime.strptime(input("Input release date (DD/MM/YYYY):"), "%d/%m/%Y")
-    #     new_category = input("Input category: ")
-    #     new_score = float(input("Input score: "))
-
-    #     new_anime = Anime(new_title, new_release_date, new_category, new_score)
-    #     self.add(new_anime)
-    #     print(f"Anime \"{new_anime.title}\" added!")
-    #     print(f"List length = {len(self.anime_list)}")
-
-    def delete_by_title(self, title):
-        pass
-
-    def edit_by_title(self, title):
-        pass
+    # def add_item(self, anime_item):
+    #     self.anime_data = self.anime_data.append(anime_item)
+    #     AnimeDatabase.__write_json_data(self.anime_data)
+    
+    def add_item_from_dict(self, anime_dict):
+        new_item = AnimeItem(id=len(self.anime_item_list),
+                             title=anime_dict["title"],
+                             release_date=anime_dict["release_date"],
+                             image=anime_dict["image"],
+                             rating=anime_dict["rating"])
+        self.anime_item_list.append(new_item)
+        self.anime_dict_data.append(anime_dict)
+        AnimeDatabase.__write_json_data(self.anime_dict_data)
+    
+    def edit_item_from_dict(self, edit_title, anime_dict: AnimeItem):
+        anime_edit = self.get_item_by_title(edit_title)
+        anime_edit.update(anime_dict)
+        self.anime_dict_data = self.item_to_data()
+        AnimeDatabase.__write_json_data(self.anime_dict_data)
+    
+    def delete_item(self, delete_title):
+        anime_delete = self.get_item_by_title(delete_title)
+        self.anime_item_list.remove(anime_delete)
+        self.anime_dict_data = self.item_to_data()
+        AnimeDatabase.__write_json_data(self.anime_dict_data)
 
     def __load_json_data():
+        anime_dict_data = list()
         with open(JSON_PATH, "r") as json_in:
-            anime_dict_list = json.load(json_in)
-        return anime_dict_list
+            json_data = json.load(json_in)
+        anime_dict_data.extend(json_data)
+        return anime_dict_data
     
     def __write_json_data(json_data):
         with open(JSON_PATH, "w") as json_out:
             json.dump(json_data, json_out)
     
     def get_title_list(self):
-        titles = [anime["title"] for anime in self.anime_dict_list]
+        titles = [anime["title"] for anime in self.anime_dict_data]
         return titles
+    

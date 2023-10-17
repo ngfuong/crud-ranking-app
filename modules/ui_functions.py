@@ -123,20 +123,24 @@ class UIManageFunctions(MainWindow):
         if dialog.exec():
             inputs = dialog.getInputs()
             self.ui.animeList.insertItem(currIndex, inputs["title"])
+            self.dtb.add_item_from_dict(inputs)
 
     def editAnime(self):
         currIndex = self.ui.animeList.currentRow()
         item = self.ui.animeList.item(currIndex)
-        anime_item = self.dtb.get_item_by_title(item.text())
+        item_title = item.text()
+        anime_item = self.dtb.get_item_by_title(item_title)
         if item is not None:
             dialog = EditDialog(anime_item)
             if dialog.exec():
                 inputs = dialog.getInputs()
                 item.setText(inputs["title"])
+                self.dtb.edit_item_from_dict(item_title, inputs)
 
     def deleteAnime(self):
         currIndex = self.ui.animeList.currentRow()
         item = self.ui.animeList.item(currIndex)
+        item_title = item.text()
         if item is None:
             return
         question = QMessageBox.question(self, "Remove Anime",
@@ -144,7 +148,7 @@ class UIManageFunctions(MainWindow):
                                         QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         if question == QMessageBox.StandardButton.Yes:
             item = self.ui.animeList.takeItem(currIndex)
-            del item
+            self.dtb.delete_item(item_title)
     
     def searchAnime(self):
         search_anime_field = self.ui.inputAnime.text().strip()
@@ -157,10 +161,6 @@ class UIManageFunctions(MainWindow):
             for i in range(self.ui.animeList.count()):
                 it = self.ui.animeList.item(i)
                 it.setHidden(False)
-
-    def updateData(self):
-        pass
-
 
 class AnimeColumnView(MainWindow):
 

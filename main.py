@@ -37,14 +37,10 @@ class MainWindow(QMainWindow):
         widgets.editButton.clicked.connect(lambda:UIManageFunctions.editAnime(self))
         widgets.removeButton.clicked.connect(lambda:UIManageFunctions.deleteAnime(self))
         widgets.searchAnime.clicked.connect(lambda:UIManageFunctions.searchAnime(self))
-        widgets.updateDataButton.clicked.connect(lambda:UIManageFunctions.updateData(self))
-
 
         # RANKING VIEW: Setup Anime by Columns
+        # TODO: EDIT THIS
         
-
-    # Model Function: Manage Movies
-    # TODO: EDIT THIS
 
 
     # Function for searching anime
@@ -74,7 +70,7 @@ class MainWindow(QMainWindow):
     def on_rankButton_1_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(3)
     
-    def on_exitButton_1_toggled(self):
+    def on_exitButton_1_clicked(self):
         QApplication.quit()
 
 
