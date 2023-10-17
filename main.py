@@ -1,41 +1,12 @@
 import sys
 from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, QDialogButtonBox, \
                             QFormLayout, QMessageBox
-from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QDir
+from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QDir, Qt
 from PyQt6 import QtCore
 
 from ui.desktop_app_ui import Ui_MainWindow
-# from desktop_app_ui_2 import Ui_MainWindow
 
 from modules import *
-
-class AddDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.title = QLineEdit(self)
-        self.release_date = QLineEdit(self)
-        self.image = QLineEdit(self)
-        self.rating = QLineEdit(self)
-
-        buttonBox = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, self)
-
-        layout = QFormLayout(self)
-        layout.addRow("Title", self.title)
-        layout.addRow("Release Date", self.release_date)
-        layout.addRow("Image", self.image)
-        layout.addRow("Rating", self.rating)
-        layout.addWidget(buttonBox)
-
-        buttonBox.accepted.connect(self.accept)
-        buttonBox.rejected.connect(self.reject)
-    
-    def getInputs(self):
-        return {
-            "title": self.title.text(),
-            "release_date": self.release_date.text(),
-            "image": self.image.text(), 
-            "rating": self.rating.text()
-        }
 
 
 class MainWindow(QMainWindow):
@@ -63,40 +34,15 @@ class MainWindow(QMainWindow):
         # widgets.animeList.addItems(dtb.anime_title_list)
         widgets.animeList.addItems(["i1", "i2", "i3"])
         widgets.animeList.setCurrentRow(0)
-        widgets.addButton.clicked.connect(lambda:self.addAnime())
-        widgets.editButton.clicked.connect(lambda:self.editAnime())
-        widgets.removeButton.clicked.connect(lambda:self.deleteAnime())
+        widgets.addButton.clicked.connect(lambda:UIManageFunctions.addAnime(self))
+        widgets.editButton.clicked.connect(lambda:UIManageFunctions.editAnime(self))
+        widgets.removeButton.clicked.connect(lambda:UIManageFunctions.deleteAnime(self))
+        widgets.searchAnime.clicked.connect(lambda:UIManageFunctions.searchAnime(self))
+        widgets.updateDataButton.clicked.connect(lambda:UIManageFunctions.updateData(self))
 
     # Model Function: Manage Movies
     # TODO: EDIT THIS
 
-    def addAnime(self):
-        currIndex = widgets.animeList.currentRow()
-        dialog = AddDialog()
-        if dialog.exec():
-            inputs = dialog.getInputs()
-            widgets.animeList.insertItem(currIndex, inputs["title"])
-
-    def editAnime(self):
-        currIndex = widgets.animeList.currentRow()
-        item = widgets.animeList.item(currIndex)
-        if item is not None:
-            dialog = AddDialog()
-            if dialog.exec():
-                inputs = dialog.getInputs()
-                item.setText(inputs["title"])
-
-    def deleteAnime(self):
-        currIndex = widgets.animeList.currentRow()
-        item = widgets.animeList.item(currIndex)
-        if item is None:
-            return
-        question = QMessageBox.question(self, "Remove Anime",
-                                        "Do you want to remove this anime?", 
-                                        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-        if question == QMessageBox.StandardButton.Yes:
-            item = widgets.animeList.takeItem(currIndex)
-            del item
 
     # Function for searching anime
     def on_searchButton_clicked(self):

@@ -2,6 +2,8 @@ from main import MainWindow
 from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QEasingCurve
 
 from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon
+from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, QDialogButtonBox, \
+                            QFormLayout, QMessageBox
 from PyQt6 import QtSvg
 # from PyQt6.QtCore import
 
@@ -50,6 +52,79 @@ class UIFunctions(MainWindow):
     # def show_add_menu(self):
     #     msg = QMessageBox
 
+
+class AddDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.title = QLineEdit(self)
+        self.release_date = QLineEdit(self)
+        self.image = QLineEdit(self)
+        self.rating = QLineEdit(self)
+
+        buttonBox = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, self)
+
+        layout = QFormLayout(self)
+        layout.addRow("Title", self.title)
+        layout.addRow("Release Date", self.release_date)
+        layout.addRow("Image", self.image)
+        layout.addRow("Rating", self.rating)
+        layout.addWidget(buttonBox)
+
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
+    
+    def getInputs(self):
+        return {
+            "title": self.title.text(),
+            "release_date": self.release_date.text(),
+            "image": self.image.text(), 
+            "rating": self.rating.text()
+        }
+
+
+class UIManageFunctions(MainWindow):
+    def addAnime(self):
+        currIndex = self.ui.animeList.currentRow()
+        dialog = AddDialog()
+        if dialog.exec():
+            inputs = dialog.getInputs()
+            self.ui.animeList.insertItem(currIndex, inputs["title"])
+
+    def editAnime(self):
+        currIndex = self.ui.animeList.currentRow()
+        item = self.ui.animeList.item(currIndex)
+        if item is not None:
+            dialog = AddDialog()
+            if dialog.exec():
+                inputs = dialog.getInputs()
+                item.setText(inputs["title"])
+
+    def deleteAnime(self):
+        currIndex = self.ui.animeList.currentRow()
+        item = self.ui.animeList.item(currIndex)
+        if item is None:
+            return
+        question = QMessageBox.question(self, "Remove Anime",
+                                        "Do you want to remove this anime?", 
+                                        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        if question == QMessageBox.StandardButton.Yes:
+            item = self.ui.animeList.takeItem(currIndex)
+            del item
+    
+    def searchAnime(self):
+        search_anime_field = self.ui.inputAnime.text().strip()
+        if search_anime_field:
+            matched_items = self.ui.animeList.findItems(search_anime_field, Qt.MatchFlag.MatchContains)
+            for i in range(self.ui.animeList.count()):
+                it = self.ui.animeList.item(i)
+                it.setHidden(it not in matched_items)
+        else:
+            for i in range(self.ui.animeList.count()):
+                it = self.ui.animeList.item(i)
+                it.setHidden(False)
+
+    def updateData(self):
+        pass
 """
     # Change color of svg icons
 
