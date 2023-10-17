@@ -1,12 +1,11 @@
-from main import MainWindow
-from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QEasingCurve
-
+import urllib
+from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt
 from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon
-from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, QDialogButtonBox, \
-                            QFormLayout, QMessageBox
+from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, \
+                            QDialogButtonBox, QFormLayout, QMessageBox
 from PyQt6 import QtSvg
-# from PyQt6.QtCore import
 
+from main import MainWindow
 from .ui_config import UIConfig
 
 class UIFunctions(MainWindow):
@@ -54,8 +53,8 @@ class UIFunctions(MainWindow):
 
 
 class AddDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self):
+        super().__init__()
         self.title = QLineEdit(self)
         self.release_date = QLineEdit(self)
         self.image = QLineEdit(self)
@@ -82,6 +81,41 @@ class AddDialog(QDialog):
         }
 
 
+class EditDialog(QDialog):
+    def __init__(self, anime_item):
+        super().__init__() 
+
+        self.title = QLineEdit(self)
+        self.release_date = QLineEdit(self)
+        self.image = QLineEdit(self)
+        self.rating = QLineEdit(self)
+
+        self.title.setText(anime_item.title)
+        self.release_date.setText(anime_item.release_date) 
+        self.image.setText(anime_item.image)
+        self.rating.setText(anime_item.rating)
+
+        buttonBox = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, self)
+
+        layout = QFormLayout(self)
+        layout.addRow("Title", self.title)
+        layout.addRow("Release Date", self.release_date)
+        layout.addRow("Image", self.image)
+        layout.addRow("Rating", self.rating)
+        layout.addWidget(buttonBox)
+
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
+
+    def getInputs(self):
+        return {
+            "title": self.title.text(),
+            "release_date": self.release_date.text(),
+            "image": self.image.text(), 
+            "rating": self.rating.text()
+        }
+        
+        
 class UIManageFunctions(MainWindow):
     def addAnime(self):
         currIndex = self.ui.animeList.currentRow()
@@ -93,8 +127,9 @@ class UIManageFunctions(MainWindow):
     def editAnime(self):
         currIndex = self.ui.animeList.currentRow()
         item = self.ui.animeList.item(currIndex)
+        anime_item = self.dtb.get_item_by_title(item.text())
         if item is not None:
-            dialog = AddDialog()
+            dialog = EditDialog(anime_item)
             if dialog.exec():
                 inputs = dialog.getInputs()
                 item.setText(inputs["title"])
@@ -125,6 +160,16 @@ class UIManageFunctions(MainWindow):
 
     def updateData(self):
         pass
+
+
+class AnimeColumnView(MainWindow):
+
+    def viewAnimeInColumn(self, anime_dict, column_qlabel):
+        url = anime_dict["image"]
+        img_data = urllib.urlopen(url).read()
+        img_pixmap = QPixmap()
+        img_pixmap.loadFromData(img_data)
+        column_qlabel.setPixmap(img_pixmap)
 """
     # Change color of svg icons
 

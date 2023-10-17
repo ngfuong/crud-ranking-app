@@ -7,6 +7,7 @@ from PyQt6 import QtCore
 from ui.desktop_app_ui import Ui_MainWindow
 
 from modules import *
+from modules.models import AnimeDatabase
 
 
 class MainWindow(QMainWindow):
@@ -21,8 +22,6 @@ class MainWindow(QMainWindow):
 
         widgets.leftMenu.show()
         widgets.logoLabel_3.hide()
-        # widgets.stackedWidget.setCurrentIndex(0)
-        # widgets.homeButton_2.setChecked(True)
 
         # UI: Toggle menu
         widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggle_menu(self, enabled=True))
@@ -30,15 +29,19 @@ class MainWindow(QMainWindow):
         widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggleButtonMousePressed(self, pressed=self.toggleButtonPressed))
 
         # CRUD Model: Setup Manage Views
-        dtb = AnimeDatabase()
-        # widgets.animeList.addItems(dtb.anime_title_list)
-        widgets.animeList.addItems(["i1", "i2", "i3"])
+        self.dtb = AnimeDatabase()
+        self.dtb.load_data()
+        widgets.animeList.addItems(self.dtb.anime_title_list)
         widgets.animeList.setCurrentRow(0)
         widgets.addButton.clicked.connect(lambda:UIManageFunctions.addAnime(self))
         widgets.editButton.clicked.connect(lambda:UIManageFunctions.editAnime(self))
         widgets.removeButton.clicked.connect(lambda:UIManageFunctions.deleteAnime(self))
         widgets.searchAnime.clicked.connect(lambda:UIManageFunctions.searchAnime(self))
         widgets.updateDataButton.clicked.connect(lambda:UIManageFunctions.updateData(self))
+
+
+        # RANKING VIEW: Setup Anime by Columns
+        
 
     # Model Function: Manage Movies
     # TODO: EDIT THIS
