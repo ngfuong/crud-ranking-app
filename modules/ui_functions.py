@@ -1,41 +1,36 @@
-import urllib
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt
-from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon
+import requests
+
+from PyQt6.QtCore import QPropertyAnimation, QVariantAnimation, QEasingCurve, Qt, QSize, QRect
+from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon, QImage
 from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, \
-                            QDialogButtonBox, QFormLayout, QMessageBox
+                            QDialogButtonBox, QFormLayout, QMessageBox, QFrame, QLabel, \
+                            QGraphicsDropShadowEffect
 from PyQt6 import QtSvg
 
 from main import MainWindow
 from .ui_config import UIConfig
+from .models import AnimeItem
 
 class UIFunctions(MainWindow):
-    def toggle_menu(self, enabled):
-        if enabled:
-            # GET WIDTH
-            width = self.ui.leftMenu.width()
-            maxExtend = UIConfig.MENU_FULL_WIDTH 
-            standard = UIConfig.MENU_COLLAPSED_WIDTH
+    def toggle_menu(self):
+        # GET WIDTH
+        width = self.ui.leftMenu.width()
+        maxExtend = UIConfig.MENU_FULL_WIDTH
+        standard = UIConfig.MENU_COLLAPSED_WIDTH
 
-            # SET MAX WIDTH
-            if width == UIConfig.MENU_COLLAPSED_WIDTH:
-                widthExtended = maxExtend
-                self.ui.logoLabel_3.show()
-            else:
-                widthExtended = standard
-                self.ui.logoLabel_3.hide()
-            
-            # ANIMATION
-            self.animation = QPropertyAnimation(self.ui.leftMenu, b"minimumWidth")
-            self.animation.setDuration(UIConfig.MENU_TOGGLE_ANIMATION)
-            self.animation.setStartValue(width)
-            self.animation.setEndValue(widthExtended)
-            self.animation.setEasingCurve(QEasingCurve.Type.InOutQuart)
-            self.animation.start()
-    
-    def toggleLeftBox(self, enabled):
-        if enabled:
-            # GET WIDTH
-            width = self.ui.extraLeftBox.width()
+        # SET MAX WIDTH
+        if width == standard:
+            widthExtended = maxExtend
+        else:
+            widthExtended = standard
+
+        # ANIMATION
+        self.animation = QPropertyAnimation(self.ui.leftMenu, b"minimumWidth")
+        self.animation.setDuration(UIConfig.TOGGLE_ANIMATION_DURATION)
+        self.animation.setStartValue(width)
+        self.animation.setEndValue(widthExtended)
+        self.animation.setEasingCurve(QEasingCurve.Type.InOutQuart)
+        self.animation.start()
     
     def toggleButtonMousePressed(self, pressed=False):
         icon = QIcon()
@@ -164,12 +159,48 @@ class UIManageFunctions(MainWindow):
 
 class AnimeColumnView(MainWindow):
 
-    def viewAnimeInColumn(self, anime_dict, column_qlabel):
-        url = anime_dict["image"]
-        img_data = urllib.urlopen(url).read()
-        img_pixmap = QPixmap()
-        img_pixmap.loadFromData(img_data)
-        column_qlabel.setPixmap(img_pixmap)
+    def updateAnimeView(self):
+        anime1 = self.dtb.anime_item_list[0]
+        anime2 = self.dtb.anime_item_list[1]
+        anime3 = self.dtb.anime_item_list[2]
+        anime4 = self.dtb.anime_item_list[3]
+        AnimeColumnView.viewAnimeInColumn(self, anime1, self.ui.animeLabel1, self.ui.animeTitle1)
+        AnimeColumnView.viewAnimeInColumn(self, anime2, self.ui.animeLabel2, self.ui.animeTitle2)
+        AnimeColumnView.viewAnimeInColumn(self, anime3, self.ui.animeLabel3, self.ui.animeTitle3)
+        AnimeColumnView.viewAnimeInColumn(self, anime4, self.ui.animeLabel4, self.ui.animeTitle4)
+
+    def viewSortedByRank(self):
+        self.dtb.sort_item_by_rating()
+        AnimeColumnView.updateAnimeView(self)
+
+    def viewSortedByDate(self):
+        self.dtb.sort_item_by_date()        
+        AnimeColumnView.updateAnimeView(self)
+    
+    def viewSortedAtoZ(self):
+        self.dtb.sort_item_by_title()
+        AnimeColumnView.updateAnimeView(self)
+    
+    def viewAnimeInColumn(self, anime:AnimeItem, anime_info:QLabel, anime_title:QLabel):
+        img_url = anime.image
+        # img_data = requests.get(img_url).content
+        # img_pixmap = QPixmap()
+        # img_pixmap.loadFromData(img_data)
+        # img_pixmap = img_pixmap.scaled(225, 318, Qt.AspectRatioMode.KeepAspectRatio)
+        description_text = anime.release_date + "\n" \
+                            + "Rating: " + str(anime.rating) +"/10"
+        anime_info.setText(description_text)
+        # anime_info.setAlignment("AlignLeft")
+        anime_title.setText(anime.title)
+        # img_view.setPixmap(img_pixmap)
+
+    def on_animeView_Hovered(self):
+        effect = QGraphicsDropShadowEffect(self.ui.animeCol1)
+        effect.setColor(Qt.GlobalColor.white)
+        effect.setOffset(0,0)
+        effect.setBlurRadius(20)
+        self.ui.animeCol1.parent().setGraphicsEffect(effect)
+
 """
     # Change color of svg icons
 

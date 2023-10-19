@@ -5,6 +5,7 @@ from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QDir,
 from PyQt6 import QtCore
 
 from ui.desktop_app_ui import Ui_MainWindow
+# from ui.desktop_app_old_uii import Ui_MainWindow
 
 from modules import *
 from modules.models import AnimeDatabase
@@ -14,7 +15,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
-        QDir.setCurrent("./")
+        # QDir.setCurrent("./")
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         global widgets
@@ -24,8 +25,8 @@ class MainWindow(QMainWindow):
         widgets.logoLabel_3.hide()
 
         # UI: Toggle menu
-        widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggle_menu(self, enabled=True))
         self.toggleButtonPressed = False
+        widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggle_menu(self))
         widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggleButtonMousePressed(self, pressed=self.toggleButtonPressed))
 
         # CRUD Model: Setup Manage Views
@@ -39,8 +40,18 @@ class MainWindow(QMainWindow):
         widgets.searchAnime.clicked.connect(lambda:UIManageFunctions.searchAnime(self))
 
         # RANKING VIEW: Setup Anime by Columns
+        widgets.sortRankButton.clicked.connect(lambda:AnimeColumnView.viewSortedByRank(self))
+        widgets.sortDateButton.clicked.connect(lambda:AnimeColumnView.viewSortedByDate(self))
+        widgets.AtoZButton.clicked.connect(lambda:AnimeColumnView.viewSortedAtoZ(self))
         # TODO: EDIT THIS
-        
+        anime1 = self.dtb.anime_item_list[0]
+        anime2 = self.dtb.anime_item_list[1]
+        anime3 = self.dtb.anime_item_list[2]
+        anime4 = self.dtb.anime_item_list[3]
+        AnimeColumnView.viewAnimeInColumn(self, anime1, widgets.animeLabel1, widgets.animeTitle1)
+        AnimeColumnView.viewAnimeInColumn(self, anime2, widgets.animeLabel2, widgets.animeTitle2)
+        AnimeColumnView.viewAnimeInColumn(self, anime3, widgets.animeLabel3, widgets.animeTitle3)
+        AnimeColumnView.viewAnimeInColumn(self, anime4, widgets.animeLabel4, widgets.animeTitle4)
 
 
     # Function for searching anime

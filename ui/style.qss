@@ -1,6 +1,13 @@
 /* Style for mainwindow START */
     #MainWindow {
-        background-color: #e4e4e4;
+        /* background-color: #f26419; */
+        /* background-color: rgb(0,0,0); */
+        /* background-color:qlineargradient(spread:pad, x1:0, y1:0.5, x2:0, y2:1, 
+                                                stop:0.5 rgba(255,255,255,1), 
+                                                stop:1 rgba(242,100,25,1)); */
+        background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, 
+                                                stop:0 #f26419, 
+                                                stop:1 #000);
     }
 /* ==============END==========*/
 
@@ -11,9 +18,6 @@
         width: 50px;
         border: none;
     }
-    /* #toggleButton QPushButton:checked {
-        qproperty-icon: "ui/sidebar/x-solid-f26419.svg"
-    } */
 /* ==============END==========*/
 
 /* Style for header widget START */
@@ -28,6 +32,8 @@
     }
 
     #searchInput {
+        color: #f26419;
+        font-weight: 700;
         border-radius: 15%;
         padding: 5px 10px;
         background-color: #e4e4e4;
@@ -64,24 +70,6 @@
         /* border-bottom: 1px solid #b0b0b0; */
     }
 
-    /* #leftMenu QToolButton .text {
-        padding-top: 5px;
-    } */
-    
-    #leftMenu QToolButton:hover {
-        color: #fff;
-        /* border-radius: 15%; */
-        /* background-color: #b9b9b9; */
-        /* padding: 8px 0 8px 15px; */
-    }
-   
-    #leftMenu QToolButton:checked {
-        color: #fff;
-        /* border-radius: 15%; */
-        /* padding: 8px 0 8px 15px; */
-        /* background-color: #b9b9b9;  */
-    }
-
     /* style for logo image */
     #logoLabel_1 {
         padding: 5px;
@@ -93,13 +81,61 @@
         border-radius: 10%;
     }
 
-/* ==============END==========*/
 
+/* CRUD START */
     #manageMenu QPushButton {
-        color: #fff;
-        background-color: #f26419;
+        color: #f26419;
+        background-color: #fff;
         font-family: 'Soliden Trial';
         font-weight: 600;
         border: none;
-        padding: 2px;
+        padding: 4px;
     }
+
+    #manageMenu QLineEdit {
+        color: #000;
+    }
+
+    #moviesPage QListWidget{
+        color: #000;
+        border-bottom: 1px solid #fff;
+    }
+
+/* ==============END==========*/
+
+/* Ranking page Widget START */
+    #rankMenu QPushButton {
+        color: #fff;
+        /* background-color: #fff; */
+        font-family: 'Soliden Trial';
+        font-weight: 700;
+        border: none;
+        padding: 4px;
+
+    }
+    #rankMenu QPushButton:hover {
+        border: 2px solid #fff;
+        border-radius: 5%;
+        padding: -2px;
+    }
+    #animeViewFrame QLabel{
+        border: none;
+        color: #fff;
+        font-family: Helvetica, sans-serif;
+    }
+
+    #animeViewFrame QFrame:hover {
+        border-radius: 5%;
+        /* border-style: none; */
+        /* color: #f26419; */
+        border: 1px solid #fff;
+        /* background: #fff; */
+        /* padding: -15px 5px 5px 5px; */
+    }
+
+    #animeView1 QLabel:hover {
+        border:none;
+    }
+
+/* ==============END==========*/
+
