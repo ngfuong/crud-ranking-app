@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, QDialogButtonBox, \
-                            QFormLayout, QMessageBox
+                            QFormLayout, QMessageBox, QGraphicsDropShadowEffect, QFrame
 from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QDir, Qt
 from PyQt6 import QtCore
 
@@ -28,6 +28,9 @@ class MainWindow(QMainWindow):
         widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggle_menu(self))
         widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggleButtonMousePressed(self, pressed=self.toggleButtonPressed))
 
+        # Home Page
+        # TODO: Edit this
+
         # CRUD Model: Setup Manage Views
         self.dtb = AnimeDatabase()
         self.dtb.load_data()
@@ -48,10 +51,22 @@ class MainWindow(QMainWindow):
         anime3 = self.dtb.anime_item_list[2]
         anime4 = self.dtb.anime_item_list[3]
         AnimeColumnView.viewAnimeInColumn(self, anime1, widgets.animeLabel1, widgets.animeTitle1)
+        widgets.animeCol1.enterEvent = self.animeView_enterEvent(widgets.animeCol1)
+        widgets.animeCol1.leaveEvent = self.animeView_leaveEvent(widgets.animeCol1)
         AnimeColumnView.viewAnimeInColumn(self, anime2, widgets.animeLabel2, widgets.animeTitle2)
         AnimeColumnView.viewAnimeInColumn(self, anime3, widgets.animeLabel3, widgets.animeTitle3)
         AnimeColumnView.viewAnimeInColumn(self, anime4, widgets.animeLabel4, widgets.animeTitle4)
 
+
+    def animeView_enterEvent(self, animeView: QFrame):
+        effect = QGraphicsDropShadowEffect(animeView)
+        effect.setColor(Qt.GlobalColor.white)
+        effect.setOffset(5,5)
+        effect.setBlurRadius(20)
+        animeView.setGraphicsEffect(effect)
+
+    def animeView_leaveEvent(self, animeView: QFrame):
+        animeView.setGraphicsEffect(None)
 
     # Function for searching anime
     def on_searchButton_clicked(self):

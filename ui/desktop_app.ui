@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1239</width>
-    <height>560</height>
+    <width>975</width>
+    <height>568</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -604,15 +604,73 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="homePage">
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Home Page</string>
+            <widget class="QFrame" name="homeFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="homeText">
+                <property name="font">
+                 <font>
+                  <family>Soliden Trial Black Exp</family>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Welcome to Crunchyroll, the world’s largest home for anime!</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="homeImg">
+                <property name="maximumSize">
+                 <size>
+                  <width>350</width>
+                  <height>525</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap>assets/spyxfamily.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
@@ -772,6 +830,12 @@
               </property>
               <item>
                <widget class="QFrame" name="rankMenu">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -914,7 +978,7 @@
                       <property name="maximumSize">
                        <size>
                         <width>250</width>
-                        <height>318</height>
+                        <height>350</height>
                        </size>
                       </property>
                       <property name="text">
@@ -927,7 +991,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="alignment">
-                       <set>Qt::AlignBottom|Qt::AlignJustify</set>
+                       <set>Qt::AlignJustify|Qt::AlignTop</set>
                       </property>
                      </widget>
                     </item>
@@ -1024,7 +1088,7 @@
                       <property name="maximumSize">
                        <size>
                         <width>250</width>
-                        <height>318</height>
+                        <height>350</height>
                        </size>
                       </property>
                       <property name="text">
@@ -1037,7 +1101,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="alignment">
-                       <set>Qt::AlignBottom|Qt::AlignJustify</set>
+                       <set>Qt::AlignJustify|Qt::AlignTop</set>
                       </property>
                      </widget>
                     </item>
@@ -1134,7 +1198,7 @@
                       <property name="maximumSize">
                        <size>
                         <width>250</width>
-                        <height>318</height>
+                        <height>350</height>
                        </size>
                       </property>
                       <property name="text">
@@ -1147,7 +1211,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="alignment">
-                       <set>Qt::AlignBottom|Qt::AlignJustify</set>
+                       <set>Qt::AlignJustify|Qt::AlignTop</set>
                       </property>
                      </widget>
                     </item>
@@ -1244,7 +1308,7 @@
                       <property name="maximumSize">
                        <size>
                         <width>250</width>
-                        <height>318</height>
+                        <height>350</height>
                        </size>
                       </property>
                       <property name="text">
@@ -1257,7 +1321,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="alignment">
-                       <set>Qt::AlignBottom|Qt::AlignJustify</set>
+                       <set>Qt::AlignJustify|Qt::AlignTop</set>
                       </property>
                      </widget>
                     </item>

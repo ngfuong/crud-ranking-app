@@ -129,6 +129,7 @@
     #animeViewFrame QWidget:hover {
         border-radius: 5%;
         border: 1px solid #fff;
+        background: #fff;
     }
 
     #animeViewFrame QLabel:hover {
@@ -147,3 +148,16 @@
 
 /* ==============END==========*/
 
+
+/* Home page Style START */
+    #homeFrame {
+        background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, 
+                                                stop:0 #f26419, 
+                                                stop:1 #000);
+    }
+
+    #homeText {
+        color: #fff;
+    }
+
+/* ==============END==========*/

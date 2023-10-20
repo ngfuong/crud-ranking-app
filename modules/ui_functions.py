@@ -41,11 +41,6 @@ class UIFunctions(MainWindow):
             self.toggleButtonPressed = True 
         self.ui.toggleButton.setIcon(icon)
 
-    # CRUD APPLICATIONS
-    # def show_add_menu(self):
-    #     msg = QMessageBox
-
-
 class AddDialog(QDialog):
     def __init__(self):
         super().__init__()
@@ -193,12 +188,6 @@ class AnimeColumnView(MainWindow):
         anime_title.setText(anime.title)
         # img_view.setPixmap(img_pixmap)
 
-    def on_animeView_Hovered(self):
-        effect = QGraphicsDropShadowEffect(self.ui.animeCol1)
-        effect.setColor(Qt.GlobalColor.white)
-        effect.setOffset(0,0)
-        effect.setBlurRadius(20)
-        self.ui.animeCol1.parent().setGraphicsEffect(effect)
 
 """
     # Change color of svg icons
