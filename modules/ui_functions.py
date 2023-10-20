@@ -2,8 +2,7 @@ import requests
 
 from PyQt6.QtCore import QPropertyAnimation, QVariantAnimation, QEasingCurve, Qt, QSize, QRect
 from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon, QImage
-from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, \
-                            QDialogButtonBox, QFormLayout, QMessageBox, QFrame, QLabel, \
+from PyQt6.QtWidgets import QDialog, QLineEdit, QDialogButtonBox, QFormLayout, QMessageBox, QLabel, \
                             QGraphicsDropShadowEffect
 from PyQt6 import QtSvg
 
@@ -88,7 +87,7 @@ class EditDialog(QDialog):
         self.title.setText(anime_item.title)
         self.release_date.setText(anime_item.release_date) 
         self.image.setText(anime_item.image)
-        self.rating.setText(anime_item.rating)
+        self.rating.setText(str(anime_item.rating))
 
         buttonBox = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, self)
 
@@ -157,8 +156,8 @@ class UIManageFunctions(MainWindow):
                 it = self.ui.animeList.item(i)
                 it.setHidden(False)
 
-class AnimeColumnView(MainWindow):
 
+class AnimeColumnView(MainWindow):
     def updateAnimeView(self):
         anime1 = self.dtb.anime_item_list[0]
         anime2 = self.dtb.anime_item_list[1]

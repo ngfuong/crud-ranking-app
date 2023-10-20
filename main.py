@@ -5,7 +5,6 @@ from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QDir,
 from PyQt6 import QtCore
 
 from ui.desktop_app_ui import Ui_MainWindow
-# from ui.desktop_app_old_uii import Ui_MainWindow
 
 from modules import *
 from modules.models import AnimeDatabase

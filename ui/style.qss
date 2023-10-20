@@ -9,6 +9,9 @@
                                                 stop:0 #f26419, 
                                                 stop:1 #000);
     }
+    #MainWindow AddDialog {
+        color: #000;
+    }
 /* ==============END==========*/
 
 
@@ -111,7 +114,6 @@
         font-weight: 700;
         border: none;
         padding: 4px;
-
     }
     #rankMenu QPushButton:hover {
         border: 2px solid #fff;
@@ -124,14 +126,20 @@
         font-family: Helvetica, sans-serif;
     }
 
-    #animeViewFrame QFrame:hover {
+    #animeViewFrame QWidget:hover {
         border-radius: 5%;
-        /* border-style: none; */
-        /* color: #f26419; */
         border: 1px solid #fff;
-        /* background: #fff; */
-        /* padding: -15px 5px 5px 5px; */
     }
+
+    #animeViewFrame QLabel:hover {
+        border-style: none;
+    }
+
+    /* #animeCol1:hover {
+        border-radius: 5%;
+        border: 1px solid #fff;
+
+    } */
 
     #animeView1 QLabel:hover {
         border:none;
