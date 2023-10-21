@@ -59,6 +59,7 @@ class UIFunctions(MainWindow):
         target_widget.mouseMoveEvent = UIFunctions.dropShadowOn(target_widget)
         target_widget.mousePressEvent = UIFunctions.dropShadowOff(target_widget)
 
+"""
 class AddDialog(QDialog):
     def __init__(self):
         super().__init__()
@@ -121,7 +122,8 @@ class EditDialog(QDialog):
             "image": self.image.text(), 
             "rating": self.rating.text()
         }
-        
+"""
+
 def get_dialog_input(dialog_ui: Ui_AddDialog) -> dict:
     return {
         "title": dialog_ui.titleInput.text(),
@@ -146,7 +148,7 @@ class UIManageFunctions(MainWindow):
         currIndex = self.ui.animeList.currentRow()
         item = self.ui.animeList.item(currIndex)
         item_title = item.text()
-        anime_item = self.dtb.get_item_by_title(item_title)
+        # anime_item = self.dtb.get_item_by_title(item_title)
         if item is not None:
             EditDialog = QDialog()
             edit_dialog = Ui_EditDialog()

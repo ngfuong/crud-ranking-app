@@ -95,7 +95,7 @@ class Ui_AddDialog(object):
 
     def retranslateUi(self, AddDialog):
         _translate = QtCore.QCoreApplication.translate
-        AddDialog.setWindowTitle(_translate("AddDialog", "Dialog"))
+        AddDialog.setWindowTitle(_translate("AddDialog", "Add New Anime"))
         self.titleLabel.setText(_translate("AddDialog", "New Title"))
         self.releasedateLabel.setText(_translate("AddDialog", "New Release Date"))
         self.imageLabel.setText(_translate("AddDialog", "New Image"))

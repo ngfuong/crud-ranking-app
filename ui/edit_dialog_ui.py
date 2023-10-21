@@ -95,7 +95,7 @@ class Ui_EditDialog(object):
 
     def retranslateUi(self, EditDialog):
         _translate = QtCore.QCoreApplication.translate
-        EditDialog.setWindowTitle(_translate("EditDialog", "Dialog"))
+        EditDialog.setWindowTitle(_translate("EditDialog", "Edit Anime"))
         self.titleLabel.setText(_translate("EditDialog", "New Title"))
         self.releasedateLabel.setText(_translate("EditDialog", "New Release Date"))
         self.imageLabel.setText(_translate("EditDialog", "New Image"))
