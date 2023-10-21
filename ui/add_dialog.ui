@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>AddDialog</class>
+ <widget class="QDialog" name="AddDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -37,13 +37,19 @@
          </property>
          <item>
           <widget class="QLabel" name="titleLabel">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string>TextLabel</string>
+            <string>New Title</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="titleInput"/>
          </item>
         </layout>
        </widget>
@@ -62,13 +68,19 @@
          </property>
          <item>
           <widget class="QLabel" name="releasedateLabel">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string>TextLabel</string>
+            <string>New Release Date</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="releasedateInput"/>
          </item>
         </layout>
        </widget>
@@ -87,13 +99,23 @@
          </property>
          <item>
           <widget class="QLabel" name="imageLabel">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string>TextLabel</string>
+            <string>New Image</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QPushButton" name="uploadImgButton">
+           <property name="text">
+            <string>Choose from file...</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -112,13 +134,19 @@
          </property>
          <item>
           <widget class="QLabel" name="ratingLabel">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string>TextLabel</string>
+            <string>New Rating</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_4"/>
+          <widget class="QLineEdit" name="ratingInput"/>
          </item>
         </layout>
        </widget>
@@ -143,7 +171,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>AddDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -159,7 +187,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>AddDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

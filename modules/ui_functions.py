@@ -1,12 +1,14 @@
 import requests
 
 from PyQt6.QtCore import QPropertyAnimation, QVariantAnimation, QEasingCurve, Qt, QSize, QRect
-from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon, QImage
+from PyQt6.QtGui import QColor, QPixmap, QPainter, QPixmap, QIcon, QImage, QColorConstants
 from PyQt6.QtWidgets import QDialog, QLineEdit, QDialogButtonBox, QFormLayout, QMessageBox, QLabel, \
                             QGraphicsDropShadowEffect
 from PyQt6 import QtSvg
 
 from main import MainWindow
+from ui.add_dialog_ui import Ui_AddDialog
+from ui.edit_dialog_ui import Ui_EditDialog
 from .ui_config import UIConfig
 from .models import AnimeItem
 
@@ -40,6 +42,22 @@ class UIFunctions(MainWindow):
             icon.addPixmap(QPixmap("ui/sidebar/x-solid-f26419.svg"))
             self.toggleButtonPressed = True 
         self.ui.toggleButton.setIcon(icon)
+    
+    def dropShadowOn(target_widget):
+        effect = QGraphicsDropShadowEffect(target_widget)
+        effect.setColor(QColorConstants.Black)
+        effect.setOffset(10,10)
+        effect.setBlurRadius(40)
+        target_widget.setGraphicsEffect(effect)
+
+    def dropShadowOff(target_widget):
+        target_widget.setGraphicsEffect(None)
+
+    def dropShadowOnHover(self, target_widget:QLabel):
+        target_widget.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
+        # TODO: check this??
+        target_widget.mouseMoveEvent = UIFunctions.dropShadowOn(target_widget)
+        target_widget.mousePressEvent = UIFunctions.dropShadowOff(target_widget)
 
 class AddDialog(QDialog):
     def __init__(self):
@@ -104,13 +122,23 @@ class EditDialog(QDialog):
             "rating": self.rating.text()
         }
         
-        
+def get_dialog_input(dialog_ui: Ui_AddDialog) -> dict:
+    return {
+        "title": dialog_ui.titleInput.text(),
+        "release_date": dialog_ui.releasedateInput.text(),
+        "image": None,  #TODO: edit this
+        "rating": dialog_ui.ratingInput.text()
+    }
+
 class UIManageFunctions(MainWindow):
     def addAnime(self):
         currIndex = self.ui.animeList.currentRow()
-        dialog = AddDialog()
-        if dialog.exec():
-            inputs = dialog.getInputs()
+        AddDialog = QDialog()
+        add_dialog = Ui_AddDialog()
+        add_dialog.setupUi(AddDialog)
+        AddDialog.show()
+        if AddDialog.exec():
+            inputs = get_dialog_input(add_dialog)
             self.ui.animeList.insertItem(currIndex, inputs["title"])
             self.dtb.add_item_from_dict(inputs)
 
@@ -120,9 +148,12 @@ class UIManageFunctions(MainWindow):
         item_title = item.text()
         anime_item = self.dtb.get_item_by_title(item_title)
         if item is not None:
-            dialog = EditDialog(anime_item)
-            if dialog.exec():
-                inputs = dialog.getInputs()
+            EditDialog = QDialog()
+            edit_dialog = Ui_EditDialog()
+            edit_dialog.setupUi(EditDialog)
+            EditDialog.show()
+            if EditDialog.exec():
+                inputs = get_dialog_input(edit_dialog)
                 item.setText(inputs["title"])
                 self.dtb.edit_item_from_dict(item_title, inputs)
 
