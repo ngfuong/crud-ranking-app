@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>437</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Edit Anime</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>sidebar/Crunchyroll_Logo.png</normaloff>sidebar/Crunchyroll_Logo.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -49,7 +53,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="titleInput"/>
+          <widget class="QLineEdit" name="titleInput">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -80,7 +91,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="releasedateInput"/>
+          <widget class="QLineEdit" name="releasedateInput">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -111,9 +129,21 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="uploadImgButton">
+          <widget class="QToolButton" name="uploadImgButton">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
-            <string>Choose from file...</string>
+            <string>Browse</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -146,7 +176,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="ratingInput"/>
+          <widget class="QLineEdit" name="ratingInput">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

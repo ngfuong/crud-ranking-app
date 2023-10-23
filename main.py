@@ -36,10 +36,10 @@ class MainWindow(QMainWindow):
         self.dtb.load_data()
         widgets.animeList.addItems(self.dtb.anime_title_list)
         widgets.animeList.setCurrentRow(0)
-        widgets.addButton.clicked.connect(lambda:UIManageFunctions.addAnime(self))
-        widgets.editButton.clicked.connect(lambda:UIManageFunctions.editAnime(self))
-        widgets.removeButton.clicked.connect(lambda:UIManageFunctions.deleteAnime(self))
-        widgets.searchAnime.clicked.connect(lambda:UIManageFunctions.searchAnime(self))
+        widgets.addButton.clicked.connect(lambda:UIManageFunctions.add_anime(self))
+        widgets.editButton.clicked.connect(lambda:UIManageFunctions.edit_anime(self))
+        widgets.removeButton.clicked.connect(lambda:UIManageFunctions.delete_anime(self))
+        widgets.searchAnime.clicked.connect(lambda:UIManageFunctions.search_anime(self))
 
         # RANKING VIEW: Setup Anime by Columns
         widgets.sortRankButton.clicked.connect(lambda:AnimeColumnView.viewSortedByRank(self))
@@ -51,8 +51,8 @@ class MainWindow(QMainWindow):
         anime3 = self.dtb.anime_item_list[2]
         anime4 = self.dtb.anime_item_list[3]
         AnimeColumnView.viewAnimeInColumn(self, anime1, widgets.animeLabel1, widgets.animeTitle1)
-        widgets.animeCol1.enterEvent = self.animeView_enterEvent(widgets.animeCol1)
-        widgets.animeCol1.leaveEvent = self.animeView_leaveEvent(widgets.animeCol1)
+        # widgets.animeCol1.enterEvent = self.animeView_enterEvent(widgets.animeCol1)
+        # widgets.animeCol1.leaveEvent = self.animeView_leaveEvent(widgets.animeCol1)
         AnimeColumnView.viewAnimeInColumn(self, anime2, widgets.animeLabel2, widgets.animeTitle2)
         AnimeColumnView.viewAnimeInColumn(self, anime3, widgets.animeLabel3, widgets.animeTitle3)
         AnimeColumnView.viewAnimeInColumn(self, anime4, widgets.animeLabel4, widgets.animeTitle4)
