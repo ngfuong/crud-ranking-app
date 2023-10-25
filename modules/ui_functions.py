@@ -1,4 +1,5 @@
-# pylint: disable = no-name-in-module
+import requests
+
 from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt
 from PyQt6.QtGui import  QPixmap, QIcon, QColorConstants
 from PyQt6.QtWidgets import QMessageBox, QLabel, QGraphicsDropShadowEffect
@@ -7,6 +8,9 @@ from main import MainWindow
 from .ui_config import UIConfig
 from .dialog import AddDialog, EditDialog
 from .models import AnimeItem
+
+from .tools import deprecated
+
 
 class UIFunctions(MainWindow):
     def toggle_menu(self):
@@ -33,27 +37,25 @@ class UIFunctions(MainWindow):
         icon = QIcon()
         if pressed:
             icon.addPixmap(QPixmap("ui/sidebar/bars-solid-f26419.svg"))
-            self.toggleButtonPressed = False 
+            self.toggleButtonPressed = False
         else:
             icon.addPixmap(QPixmap("ui/sidebar/x-solid-f26419.svg"))
-            self.toggleButtonPressed = True 
+            self.toggleButtonPressed = True
         self.ui.toggleButton.setIcon(icon)
     
-    def drop_shadow_on(target_widget):
+    def drop_shadow_on(self, target_widget):
         effect = QGraphicsDropShadowEffect(target_widget)
-        effect.setColor(QColorConstants.Black)
-        effect.setOffset(10,10)
-        effect.setBlurRadius(40)
+        effect.setColor(QColorConstants.White)
+        effect.setOffset(*UIConfig.DROP_SHADOW_OFFSET)
+        effect.setBlurRadius(UIConfig.DROP_SHADOW_BLUR_RADIUS)
         target_widget.setGraphicsEffect(effect)
 
-    def drop_shadow_off(target_widget):
+    def drop_shadow_off(self, target_widget):
         target_widget.setGraphicsEffect(None)
 
     def drop_shadow_on_hovered(self, target_widget:QLabel):
-        target_widget.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
-        # TODO: check this??
-        target_widget.mouseMoveEvent = UIFunctions.drop_shadow_on(target_widget)
-        target_widget.mousePressEvent = UIFunctions.drop_shadow_off(target_widget)
+        target_widget.enterEvent = lambda event: UIFunctions.drop_shadow_on(self, target_widget)
+        target_widget.leaveEvent = lambda event: UIFunctions.drop_shadow_off(self, target_widget)
 
 
 class UIManageFunctions(MainWindow):
@@ -109,12 +111,12 @@ class AnimeColumnView(MainWindow):
         anime2 = self.dtb.anime_item_list[1]
         anime3 = self.dtb.anime_item_list[2]
         anime4 = self.dtb.anime_item_list[3]
-        AnimeColumnView.viewAnimeInColumn(self, anime1, self.ui.animeLabel1, self.ui.animeTitle1)
-        AnimeColumnView.viewAnimeInColumn(self, anime2, self.ui.animeLabel2, self.ui.animeTitle2)
-        AnimeColumnView.viewAnimeInColumn(self, anime3, self.ui.animeLabel3, self.ui.animeTitle3)
-        AnimeColumnView.viewAnimeInColumn(self, anime4, self.ui.animeLabel4, self.ui.animeTitle4)
+        AnimeColumnView.viewAnimeInColumn(self, anime1, self.ui.animeLabel1, self.ui.animeTitle1, self.ui.animeView1)
+        AnimeColumnView.viewAnimeInColumn(self, anime2, self.ui.animeLabel2, self.ui.animeTitle2, self.ui.animeView2)
+        AnimeColumnView.viewAnimeInColumn(self, anime3, self.ui.animeLabel3, self.ui.animeTitle3, self.ui.animeView3)
+        AnimeColumnView.viewAnimeInColumn(self, anime4, self.ui.animeLabel4, self.ui.animeTitle4, self.ui.animeView4)
 
-    def viewSortedByRank(self):
+    def viewSortedByRating(self):
         self.dtb.sort_item_by_rating()
         AnimeColumnView.updateAnimeView(self)
 
@@ -126,12 +128,21 @@ class AnimeColumnView(MainWindow):
         self.dtb.sort_item_by_title()
         AnimeColumnView.updateAnimeView(self)
     
-    def viewAnimeInColumn(self, anime:AnimeItem, anime_info:QLabel, anime_title:QLabel):
+    def viewAnimeInColumn(self, anime:AnimeItem, description:QLabel, title:QLabel, image:QLabel):
+        description_text = anime.release_date + "\n" \
+                            + "Rating: " + str(anime.rating) +"/10"
+        img_pixmap = QPixmap(anime.image)
+        title.setText(anime.title)
+        description.setText(description_text)
+        image.setPixmap(img_pixmap)
+
+    @deprecated
+    def viewAnimeInColumn_byUrl(self, anime:AnimeItem, anime_info:QLabel, anime_title:QLabel):
         img_url = anime.image
-        # img_data = requests.get(img_url).content
-        # img_pixmap = QPixmap()
-        # img_pixmap.loadFromData(img_data)
-        # img_pixmap = img_pixmap.scaled(225, 318, Qt.AspectRatioMode.KeepAspectRatio)
+        img_data = requests.get(img_url, timeout=10).content
+        img_pixmap = QPixmap()
+        img_pixmap.loadFromData(img_data)
+        img_pixmap = img_pixmap.scaled(225, 318, Qt.AspectRatioMode.KeepAspectRatio)
         description_text = anime.release_date + "\n" \
                             + "Rating: " + str(anime.rating) +"/10"
         anime_info.setText(description_text)

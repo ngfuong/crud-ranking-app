@@ -19,8 +19,8 @@ class Dialog(QtWidgets.QDialog):
     def _browse_files(self):
         fname = QtWidgets.QFileDialog.getOpenFileName(self,
                                             'Open file', 
-                                            '.', 
-                                            filter='Image files (*.png, *.jpg, *.svg)'
+                                            './ui/images',
+                                            # filter='Image files (*.png, *.jpg, *.svg)'
                                             )
         self.ui.uploadImgButton.setText(fname[0])
         return fname

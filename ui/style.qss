@@ -126,11 +126,11 @@
         font-family: Helvetica, sans-serif;
     }
 
-    #animeViewFrame QWidget:hover {
+    /* OUTLINE SHADOW OF ANIME COLUMN */
+    /* #animeViewFrame QWidget:hover {
         border-radius: 5%;
         border: 1px solid #fff;
-        /* background: #fff; */
-    }
+    } */
 
     #animeViewFrame QLabel:hover {
         border-style: none;

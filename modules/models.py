@@ -8,7 +8,7 @@ class AnimeItem:
         self.title = title
         self.release_date = release_date
         self.image = image
-        self.rating = rating
+        self.rating = int(rating)
 
     def __str__(self):
         return f"{self.title}\t{self.release_date}\t{self.image==True}\t{self.rating}"
@@ -18,6 +18,9 @@ class AnimeItem:
         for k, v in new_data.items():
             if v:
                 setattr(self, k, v)
+    
+    def format_date(date_text):
+        return datetime.strptime(date_text, '%b %Y')
         
 
 JSON_PATH = 'data/data.json'
@@ -82,18 +85,22 @@ class AnimeDatabase:
     def sort_item_by_rating(self, top=None):
         self.anime_item_list = sorted(self.anime_item_list, 
                                       key=operator.attrgetter('rating'), 
-                                      reverse=True)
+                                      reverse=True
+                                      )
         if top:
             return self.anime_item_list[top]
     
     def sort_item_by_title(self, top=None):
         self.anime_item_list = sorted(self.anime_item_list, 
-                                      key=operator.attrgetter('title'))
+                                      key=operator.attrgetter('title')
+                                      )
         if top:
             return self.anime_item_list[top]
     
     def sort_item_by_date(self, top=None):
-        self.anime_item_list = sorted(self.anime_item_list, key=lambda anime: anime.release_date)
+        self.anime_item_list = sorted(self.anime_item_list, 
+                                      key=lambda x: AnimeItem.format_date(x.release_date),
+                                      reverse=True)
         if top:
             return self.anime_item_list[top]
 
@@ -112,12 +119,3 @@ class AnimeDatabase:
         titles = [anime["title"] for anime in self.anime_dict_data]
         return titles
     
-# dtb = AnimeDatabase()
-# dtb.load_data()
-# dtb.sort_item_by_title()
-# for a in dtb.anime_item_list:
-#     print(a)
-# # new_list = sorted(dtb.anime_item_list, key=lambda x: x.rating)
-
-# # for a in new_list:
-#     # print(a)
