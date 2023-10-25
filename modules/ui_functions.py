@@ -54,8 +54,8 @@ class UIFunctions(MainWindow):
         target_widget.setGraphicsEffect(None)
 
     def drop_shadow_on_hovered(self, target_widget:QLabel):
-        target_widget.enterEvent = lambda event: UIFunctions.drop_shadow_on(self, target_widget)
-        target_widget.leaveEvent = lambda event: UIFunctions.drop_shadow_off(self, target_widget)
+        target_widget.enterEvent = lambda x: UIFunctions.drop_shadow_on(self, target_widget)
+        target_widget.leaveEvent = lambda x: UIFunctions.drop_shadow_off(self, target_widget)
 
 
 class UIManageFunctions(MainWindow):

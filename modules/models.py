@@ -1,10 +1,12 @@
-from datetime import datetime
 import operator
-import json
+from datetime import datetime
+
+from data.data_io import load_json_data, write_json_data
+
 
 class AnimeItem:
-    def __init__(self, id, title, release_date, image=None, rating=None):
-        self.id = id
+    def __init__(self, anime_id, title, release_date, image=None, rating=None):
+        self.id = anime_id
         self.title = title
         self.release_date = release_date
         self.image = image
@@ -19,11 +21,10 @@ class AnimeItem:
             if v:
                 setattr(self, k, v)
     
-    def format_date(date_text):
-        return datetime.strptime(date_text, '%b %Y')
+def format_date(date_text):
+    return datetime.strptime(date_text, '%b %Y')
         
 
-JSON_PATH = 'data/data.json'
 """
 data.json item example 
     {
@@ -37,7 +38,7 @@ data.json item example
 class AnimeDatabase:
     def __init__(self):
         self.anime_item_list = list()
-        self.anime_dict_data = AnimeDatabase.__load_json_data()
+        self.anime_dict_data = load_json_data()
         self.anime_title_list = self.get_title_list()
     
     def item_to_data(self):
@@ -48,7 +49,7 @@ class AnimeDatabase:
 
     def load_data(self):
         for anime_dict in self.anime_dict_data:
-            anime = AnimeItem(id=anime_dict["id"],
+            anime = AnimeItem(anime_id=anime_dict["id"],
                           title=anime_dict["title"],
                           release_date=anime_dict["release_date"],
                           image=anime_dict["image"],
@@ -61,26 +62,26 @@ class AnimeDatabase:
                 return anime_item
 
     def add_item_from_dict(self, anime_dict):
-        new_item = AnimeItem(id=len(self.anime_item_list),
+        new_item = AnimeItem(anime_id=len(self.anime_item_list),
                              title=anime_dict["title"],
                              release_date=anime_dict["release_date"],
                              image=anime_dict["image"],
                              rating=anime_dict["rating"])
         self.anime_item_list.append(new_item)
         self.anime_dict_data.append(anime_dict)
-        AnimeDatabase.__write_json_data(self.anime_dict_data)
+        write_json_data(self.anime_dict_data)
     
     def edit_item_from_dict(self, edit_title, anime_dict: AnimeItem):
         anime_edit = self.get_item_by_title(edit_title)
         anime_edit.update(anime_dict)
         self.anime_dict_data = self.item_to_data()
-        AnimeDatabase.__write_json_data(self.anime_dict_data)
+        write_json_data(self.anime_dict_data)
     
     def delete_item(self, delete_title):
         anime_delete = self.get_item_by_title(delete_title)
         self.anime_item_list.remove(anime_delete)
         self.anime_dict_data = self.item_to_data()
-        AnimeDatabase.__write_json_data(self.anime_dict_data)
+        write_json_data(self.anime_dict_data)
 
     def sort_item_by_rating(self, top=None):
         self.anime_item_list = sorted(self.anime_item_list, 
@@ -99,23 +100,11 @@ class AnimeDatabase:
     
     def sort_item_by_date(self, top=None):
         self.anime_item_list = sorted(self.anime_item_list, 
-                                      key=lambda x: AnimeItem.format_date(x.release_date),
+                                      key=lambda x: format_date(x.release_date),
                                       reverse=True)
         if top:
             return self.anime_item_list[top]
-
-    def __load_json_data():
-        anime_dict_data = list()
-        with open(JSON_PATH, "r") as json_in:
-            json_data = json.load(json_in)
-        anime_dict_data.extend(json_data)
-        return anime_dict_data
-    
-    def __write_json_data(json_data):
-        with open(JSON_PATH, "w") as json_out:
-            json.dump(json_data, json_out)
     
     def get_title_list(self):
         titles = [anime["title"] for anime in self.anime_dict_data]
         return titles
-    

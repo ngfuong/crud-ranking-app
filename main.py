@@ -1,8 +1,6 @@
 import sys
-from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton, QDialog, QLineEdit, QDialogButtonBox, \
-                            QFormLayout, QMessageBox, QGraphicsDropShadowEffect, QFrame
-from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QPropertyAnimation, QDir, Qt
-from PyQt6 import QtCore
+from PyQt6.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QFrame
+from PyQt6.QtCore import Qt
 
 from ui.desktop_app_ui import Ui_MainWindow
 
