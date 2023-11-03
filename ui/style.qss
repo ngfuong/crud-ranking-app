@@ -120,11 +120,15 @@
         border-radius: 5%;
         padding: -2px;
     }
-    #animeViewFrame QLabel{
+
+    QScrollArea {
         border: none;
-        color: #fff;
-        font-family: Helvetica, sans-serif;
-    }
+        background: transparent; 
+    } 
+    
+    QScrollArea > QWidget > QWidget{ 
+        background: transparent; 
+    } 
 
     /* OUTLINE SHADOW OF ANIME COLUMN */
     /* #animeViewFrame QWidget:hover {
@@ -132,7 +136,7 @@
         border: 1px solid #fff;
     } */
 
-    #animeViewFrame QLabel:hover {
+    #scrollAnimeFrame QLabel:hover {
         border-style: none;
     }
 
@@ -142,7 +146,7 @@
 
     } */
 
-    #animeView1 QLabel:hover {
+    #animeView QLabel:hover {
         border:none;
     }
 

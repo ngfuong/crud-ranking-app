@@ -10,7 +10,7 @@ class AnimeItem:
         self.title = title
         self.release_date = release_date
         self.image = image
-        self.rating = int(rating)
+        self.rating = float(rating)
 
     def __str__(self):
         return f"{self.title}\t{self.release_date}\t{self.image==True}\t{self.rating}"
@@ -62,7 +62,8 @@ class AnimeDatabase:
                 return anime_item
 
     def add_item_from_dict(self, anime_dict):
-        new_item = AnimeItem(anime_id=len(self.anime_item_list),
+        anime_dict["id"] = len(self.anime_item_list)
+        new_item = AnimeItem(anime_id=anime_dict["id"],
                              title=anime_dict["title"],
                              release_date=anime_dict["release_date"],
                              image=anime_dict["image"],

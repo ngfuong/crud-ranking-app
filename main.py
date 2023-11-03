@@ -1,8 +1,12 @@
 import sys
-from PyQt6.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QFrame
+from copy import deepcopy
+
+from PyQt6.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QFrame, \
+                            QHBoxLayout
 from PyQt6.QtCore import Qt
 
-from ui.desktop_app_ui import Ui_MainWindow
+# from ui.desktop_app_ui import Ui_MainWindow
+from ui.desktop_app_scrollable_ui import Ui_MainWindow
 
 from modules import *
 from modules.models import AnimeDatabase
@@ -23,51 +27,25 @@ class MainWindow(QMainWindow):
 
         # UI: Toggle menu
         self.toggleButtonPressed = False
-        widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggle_menu(self))
-        widgets.toggleButton.clicked.connect(lambda:UIFunctions.toggleButtonMousePressed(self, pressed=self.toggleButtonPressed))
-
-        # Home Page
-        # TODO: Edit this
+        widgets.toggleButton.clicked.connect(lambda:UIAnimationFunctions.toggle_menu(self))
+        widgets.toggleButton.clicked.connect(lambda:UIAnimationFunctions.toggleButtonMousePressed(self, pressed=self.toggleButtonPressed))
 
         # CRUD Model: Setup Manage Views
         self.dtb = AnimeDatabase()
         self.dtb.load_data()
         widgets.animeList.addItems(self.dtb.anime_title_list)
         widgets.animeList.setCurrentRow(0)
-        widgets.addButton.clicked.connect(lambda:UIManageFunctions.add_anime(self))
-        widgets.editButton.clicked.connect(lambda:UIManageFunctions.edit_anime(self))
-        widgets.removeButton.clicked.connect(lambda:UIManageFunctions.delete_anime(self))
-        widgets.searchAnime.clicked.connect(lambda:UIManageFunctions.search_anime(self))
+        widgets.addButton.clicked.connect(lambda:AnimeManageFunctions.add_anime(self))
+        widgets.editButton.clicked.connect(lambda:AnimeManageFunctions.edit_anime(self))
+        widgets.removeButton.clicked.connect(lambda:AnimeManageFunctions.delete_anime(self))
+        widgets.searchAnime.clicked.connect(lambda:AnimeManageFunctions.search_anime(self))
 
         # RANKING VIEW: Setup Anime by Columns
-        widgets.sortRankButton.clicked.connect(lambda:AnimeColumnView.viewSortedByRating(self))
-        widgets.sortDateButton.clicked.connect(lambda:AnimeColumnView.viewSortedByDate(self))
-        widgets.AtoZButton.clicked.connect(lambda:AnimeColumnView.viewSortedAtoZ(self))
+        UIDisplayAnime.displayAnimeLayout(self)
+        widgets.sortRankButton.clicked.connect(lambda:UIDisplayAnime.viewSortedByRating(self))
+        widgets.sortDateButton.clicked.connect(lambda:UIDisplayAnime.viewSortedByDate(self))
+        widgets.AtoZButton.clicked.connect(lambda:UIDisplayAnime.viewSortedAtoZ(self))
         
-        # TODO: EDIT THIS TO VIEW MORE ITEMS
-        anime1 = self.dtb.anime_item_list[0]
-        anime2 = self.dtb.anime_item_list[1]
-        anime3 = self.dtb.anime_item_list[2]
-        anime4 = self.dtb.anime_item_list[3]
-        AnimeColumnView.viewAnimeInColumn(self, anime1, widgets.animeLabel1, widgets.animeTitle1, widgets.animeView1)
-        AnimeColumnView.viewAnimeInColumn(self, anime2, widgets.animeLabel2, widgets.animeTitle2, widgets.animeView2)
-        AnimeColumnView.viewAnimeInColumn(self, anime3, widgets.animeLabel3, widgets.animeTitle3, widgets.animeView3)
-        AnimeColumnView.viewAnimeInColumn(self, anime4, widgets.animeLabel4, widgets.animeTitle4, widgets.animeView4)
-        UIFunctions.drop_shadow_on_hovered(self, widgets.animeCol1)
-        UIFunctions.drop_shadow_on_hovered(self, widgets.animeCol2)
-        UIFunctions.drop_shadow_on_hovered(self, widgets.animeCol3)
-        UIFunctions.drop_shadow_on_hovered(self, widgets.animeCol4)
-
-
-    def animeView_enterEvent(self, animeView: QFrame):
-        effect = QGraphicsDropShadowEffect(animeView)
-        effect.setColor(Qt.GlobalColor.white)
-        effect.setOffset(5,5)
-        effect.setBlurRadius(20)
-        animeView.setGraphicsEffect(effect)
-
-    def animeView_leaveEvent(self, animeView: QFrame):
-        animeView.setGraphicsEffect(None)
 
     # Function for searching anime
     def on_searchButton_clicked(self):
