@@ -35,6 +35,7 @@
     }
 
     #searchInput {
+        font-family: 'Soliden Trial';
         color: #f26419;
         font-weight: 700;
         border-radius: 15%;
@@ -44,6 +45,7 @@
 
     #searchInput:focus {
         background-color: #fff;
+        color: #f26419;
     }
 /* ==============END==========*/
 

@@ -27,6 +27,12 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QFrame" name="titleFrame">
         <property name="frameShape">
@@ -39,6 +45,9 @@
          <property name="spacing">
           <number>20</number>
          </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="titleLabel">
            <property name="minimumSize">
@@ -46,6 +55,11 @@
              <width>100</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>New Title</string>
@@ -77,6 +91,9 @@
          <property name="spacing">
           <number>20</number>
          </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="releasedateLabel">
            <property name="minimumSize">
@@ -84,6 +101,11 @@
              <width>100</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>New Release Date</string>
@@ -115,6 +137,9 @@
          <property name="spacing">
           <number>20</number>
          </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="imageLabel">
            <property name="minimumSize">
@@ -122,6 +147,11 @@
              <width>100</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>New Image</string>
@@ -135,6 +165,11 @@
              <width>100</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>Browse</string>
@@ -162,6 +197,9 @@
          <property name="spacing">
           <number>20</number>
          </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="ratingLabel">
            <property name="minimumSize">
@@ -169,6 +207,11 @@
              <width>100</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>New Rating</string>
@@ -193,6 +236,11 @@
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>

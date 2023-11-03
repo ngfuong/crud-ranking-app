@@ -1,0 +1,23 @@
+/* Style for Pop-up Dialog START */
+    QDialog {
+        background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, 
+                                                stop:0 #f26419, 
+                                                stop:1 #000);
+    }
+    QLabel {
+        font-size: 12;
+        color: #fff;
+        font-family: 'Soliden Trial';
+    }
+    
+    /* #buttonBox, QToolButton {
+        color: #f26419;
+        background-color: #fff;
+        font-family: 'Soliden Trial';
+        font-weight: 600;
+        border: none;
+        padding: 4px;
+    } */
+
+/* ==============END==========*/
+/*

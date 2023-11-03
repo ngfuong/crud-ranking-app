@@ -18,7 +18,7 @@ from .custom_decorators import deprecated
 
 class AnimeItemWidget(QWidget, Ui_AnimeColumn):
     UI_LOCATION = f"{UIConfig.LOCAL_DIR}../ui/anime_column.ui"
-    STYLE_LOCATION = f"{UIConfig.LOCAL_DIR}../ui/anime_style.qss"
+    STYLE_LOCATION = f"{UIConfig.LOCAL_DIR}../ui/style_anime.qss"
     def __init__(self, anime:AnimeItem):
         QWidget.__init__(self)
         try:

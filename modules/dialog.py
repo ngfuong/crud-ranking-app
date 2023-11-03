@@ -12,9 +12,14 @@ class Dialog(QtWidgets.QDialog):
     """
     Prorotype Dialog
     """
+    STYLE_LOCATION = f"{UIConfig.LOCAL_DIR}../ui/style_popup.qss"
     def __init__(self, dialog_type):
         super().__init__()
         self.ui = None
+        
+        with open(self.STYLE_LOCATION, "r") as style_file:
+            style_config = style_file.read()
+        self.setStyleSheet(style_config)
 
     def _browse_files(self):
         fname = QtWidgets.QFileDialog.getOpenFileName(self,
