@@ -1,11 +1,5 @@
 import math
 
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve
-from PyQt6.QtGui import  QPixmap, QIcon, QColorConstants
-from PyQt6.QtWidgets import QLabel, QGraphicsDropShadowEffect
-
-from main import MainWindow
-
 class PaginationHelper:
     def __init__(self, collection, items_per_page=4) -> None:
         self.collection = collection
@@ -29,8 +23,3 @@ class PaginationHelper:
         if item_index not in range (0, self.item_count()):
             return -1
         return math.floor(item_index/self.items_per_page)
-        
-
-class UIPagination(MainWindow):
-    def displayPage(self):
-        pass
