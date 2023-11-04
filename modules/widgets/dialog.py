@@ -1,10 +1,10 @@
 from PyQt6.uic import load_ui
 from PyQt6 import QtWidgets
 
+from config import Config
 from ui.add_dialog_ui import Ui_AddDialog
 from ui.edit_dialog_ui import Ui_EditDialog
 
-from .ui_config import UIConfig
 from .models import AnimeItem
 
 
@@ -12,7 +12,7 @@ class Dialog(QtWidgets.QDialog):
     """
     Prorotype Dialog
     """
-    STYLE_LOCATION = f"{UIConfig.LOCAL_DIR}../ui/style_popup.qss"
+    STYLE_LOCATION = f"{Config.LOCAL_DIR}/ui/style_popup.qss"
     def __init__(self, dialog_type):
         super().__init__()
         self.ui = None
@@ -43,7 +43,7 @@ class AddDialog(Dialog):
     """
     Add Dialog
     """
-    UI_LOCATION = f"{UIConfig.LOCAL_DIR}../ui/add_dialog.ui"
+    UI_LOCATION = f"{Config.LOCAL_DIR}/ui/add_dialog.ui"
     def __init__(self):
         super().__init__(AddDialog)
         if isinstance(self.ui, Ui_AddDialog):
@@ -62,7 +62,7 @@ class EditDialog(Dialog):
     """
     Edit Dialog
     """
-    UI_LOCATION = f"{UIConfig.LOCAL_DIR}../ui/edit_dialog.ui"
+    UI_LOCATION = f"{Config.LOCAL_DIR}/ui/edit_dialog.ui"
     def __init__(self, edit_item:AnimeItem):
         super().__init__(EditDialog)
         try:

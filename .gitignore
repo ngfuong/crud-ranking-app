@@ -1,3 +1,3 @@
 .env/
 .env-wls/
-**/__pycache__/**
+__pycache__/
