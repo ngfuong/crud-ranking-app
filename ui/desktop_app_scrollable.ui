@@ -185,7 +185,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="homeButton_1">
+           <widget class="QToolButton" name="homeButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -226,7 +226,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="rankButton_1">
+           <widget class="QToolButton" name="rankButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -267,7 +267,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="moviesButton_1">
+           <widget class="QToolButton" name="CRUDButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -308,7 +308,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="tvshowsButton_1">
+           <widget class="QToolButton" name="tvshowsButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -605,7 +605,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="homePage">
           <layout class="QGridLayout" name="gridLayout_2">
@@ -955,8 +955,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>904</width>
-                   <height>539</height>
+                   <width>98</width>
+                   <height>28</height>
                   </rect>
                  </property>
                 </widget>
@@ -981,7 +981,7 @@
          <widget class="QWidget" name="searchPage">
           <layout class="QGridLayout" name="gridLayout_7">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="search_text">
              <property name="text">
               <string>Search Page</string>
              </property>

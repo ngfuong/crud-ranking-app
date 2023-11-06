@@ -35,7 +35,7 @@ class Dialog(QtWidgets.QDialog):
             "title": self.ui.titleInput.text(),
             "release_date": self.ui.releasedateInput.text(),
             "image": self.ui.uploadImgButton.text(),
-            "rating": self.ui.ratingInput.text()
+            "rating": float(self.ui.ratingInput.text())
         }
 
 

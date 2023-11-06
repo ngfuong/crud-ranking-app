@@ -1,12 +1,10 @@
 from PyQt6.uic import load_ui
-from PyQt6.QtGui import QPixmap
-from PyQt6.QtWidgets import QWidget
-
-from .models import AnimeItem
-from .ui_animation import UIAnimation
-from ui.anime_column_ui import Ui_AnimeColumn
+from PyQt6.QtGui import QPixmap, QColorConstants
+from PyQt6.QtWidgets import QWidget, QLabel, QGraphicsDropShadowEffect
 
 from config import Config
+from ui.anime_column_ui import Ui_AnimeColumn
+from .models import AnimeItem
 
 
 class AnimeItemWidget(QWidget, Ui_AnimeColumn):
@@ -25,7 +23,7 @@ class AnimeItemWidget(QWidget, Ui_AnimeColumn):
         self.setStyleSheet(style_config)
 
         self.anime = anime
-        UIAnimation.drop_shadow_on_hovered(self, self)
+        Animation.drop_shadow_on_hovered(self, self)
         self.display_description()
 
     def display_description(self):
@@ -35,3 +33,18 @@ class AnimeItemWidget(QWidget, Ui_AnimeColumn):
         self.ui.animeTitle.setText(self.anime.title)
         self.ui.animeInfo.setText(description_text)
         self.ui.animeView.setPixmap(img_pixmap)
+
+class Animation:
+    def drop_shadow_on(self, target_widget):
+        effect = QGraphicsDropShadowEffect(target_widget)
+        effect.setColor(QColorConstants.White)
+        effect.setOffset(*Config.DROP_SHADOW_OFFSET)
+        effect.setBlurRadius(Config.DROP_SHADOW_BLUR_RADIUS)
+        target_widget.setGraphicsEffect(effect)
+
+    def drop_shadow_off(self, target_widget):
+        target_widget.setGraphicsEffect(None)
+
+    def drop_shadow_on_hovered(self, target_widget:QLabel):
+        target_widget.enterEvent = lambda x: Animation.drop_shadow_on(self, target_widget)
+        target_widget.leaveEvent = lambda x: Animation.drop_shadow_off(self, target_widget)
