@@ -14,12 +14,13 @@ class AnimeItem:
 
     def __str__(self):
         return f"{self.title}\t{self.release_date}\t{bool(self.image)}\t{self.rating}"
-
+    
     def update(self, new_data):
         # Empty field is not updated
         for k, v in new_data.items():
             if v:
                 setattr(self, k, v)
+
 
 class AnimeDatabase:
     """
@@ -115,3 +116,6 @@ class AnimeDatabase:
 
 def format_date(date_text):
     return datetime.strptime(date_text, '%b %Y')
+
+def date_to_text(date:datetime):
+    return date.strftime("%b %Y")

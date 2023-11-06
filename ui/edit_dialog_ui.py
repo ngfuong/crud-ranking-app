@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_EditDialog(object):
     def setupUi(self, EditDialog):
         EditDialog.setObjectName("EditDialog")
-        EditDialog.resize(437, 300)
+        EditDialog.resize(437, 256)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui\\sidebar/Crunchyroll_Logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         EditDialog.setWindowIcon(icon)
@@ -60,7 +60,7 @@ class Ui_EditDialog(object):
         self.releasedateLabel.setFont(font)
         self.releasedateLabel.setObjectName("releasedateLabel")
         self.horizontalLayout_2.addWidget(self.releasedateLabel)
-        self.releasedateInput = QtWidgets.QLineEdit(parent=self.releasedateFrame)
+        self.releasedateInput = QtWidgets.QDateEdit(parent=self.releasedateFrame)
         self.releasedateInput.setMaximumSize(QtCore.QSize(200, 16777215))
         self.releasedateInput.setObjectName("releasedateInput")
         self.horizontalLayout_2.addWidget(self.releasedateInput)
@@ -81,7 +81,8 @@ class Ui_EditDialog(object):
         self.imageLabel.setObjectName("imageLabel")
         self.horizontalLayout_3.addWidget(self.imageLabel)
         self.uploadImgButton = QtWidgets.QToolButton(parent=self.imageFrame)
-        self.uploadImgButton.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.uploadImgButton.setMinimumSize(QtCore.QSize(100, 0))
+        self.uploadImgButton.setMaximumSize(QtCore.QSize(200, 16777215))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.uploadImgButton.setFont(font)

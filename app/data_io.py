@@ -11,6 +11,6 @@ def load_json_data():
 
 def write_json_data(json_data):
     with open(Config.JSON_PATH, "w") as json_out:
-        json.dump(json_data, json_out)
+        json.dump(json_data, json_out, default=str)
     
     

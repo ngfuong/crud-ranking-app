@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QGraphicsDropShadowEffect
 
 from config import Config
 from ui.anime_column_ui import Ui_AnimeColumn
-from app.models import AnimeItem
+from app.models import AnimeItem, date_to_text
 
 
 class AnimeItemWidget(QWidget, Ui_AnimeColumn):

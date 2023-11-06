@@ -1,14 +1,16 @@
 from PyQt6.uic import load_ui
-from PyQt6 import QtWidgets
+from PyQt6.QtWidgets import QDialog, QFileDialog
+from PyQt6.QtCore import QDate, QDir
 
 from config import Config
 from ui.add_dialog_ui import Ui_AddDialog
 from ui.edit_dialog_ui import Ui_EditDialog
 
 from app.models import AnimeItem
+from app.models import date_to_text, format_date
 
 
-class Dialog(QtWidgets.QDialog):
+class Dialog(QDialog):
     """
     Prorotype Dialog
     """
@@ -21,8 +23,10 @@ class Dialog(QtWidgets.QDialog):
             style_config = style_file.read()
         self.setStyleSheet(style_config)
 
+        self.dir = QDir(Config.LOCAL_DIR)
+
     def _browse_files(self):
-        fname = QtWidgets.QFileDialog.getOpenFileName(self,
+        fname = QFileDialog.getOpenFileName(self,
                                             'Open file', 
                                             './ui/images',
                                             # filter='Image files (*.png, *.jpg, *.svg)'
@@ -31,13 +35,16 @@ class Dialog(QtWidgets.QDialog):
         return fname
     
     def return_input_fields(self) -> dict:
+        date = self.ui.releasedateInput.date().toPyDate()
+        image_path = self.ui.uploadImgButton.text()
+        # 1997-07-01
         return {
             "title": self.ui.titleInput.text(),
-            "release_date": self.ui.releasedateInput.text(),
-            "image": self.ui.uploadImgButton.text(),
+            "release_date": date_to_text(date),
+            "image": self.dir.relativeFilePath(image_path),
             "rating": float(self.ui.ratingInput.text())
         }
-
+    
 
 class AddDialog(Dialog):
     """
@@ -56,7 +63,7 @@ class AddDialog(Dialog):
                 self.ui = load_ui.loadUi(self.UI_LOCATION)
 
         self.ui.uploadImgButton.clicked.connect(lambda: self._browse_files())
-    
+        self.ui.releasedateInput.setDisplayFormat("dd/MM/yyyy")
 
 class EditDialog(Dialog):
     """
@@ -71,9 +78,11 @@ class EditDialog(Dialog):
         except NameError:
             self.ui = load_ui.loadUi(self.UI_LOCATION)
 
-        self.ui.titleInput.setText(edit_item.title)
-        self.ui.releasedateInput.setText(edit_item.release_date)
-        self.ui.uploadImgButton.setText(edit_item.image)
-        self.ui.ratingInput.setText(str(edit_item.rating))
-
+        self.ui.releasedateInput.setDisplayFormat("dd/MM/yyyy")
         self.ui.uploadImgButton.clicked.connect(lambda: self._browse_files())
+
+        self.ui.titleInput.setText(edit_item.title)
+        date = format_date(edit_item.release_date)
+        self.ui.releasedateInput.setDate(QDate(date.year, date.month, date.day))
+        self.ui.uploadImgButton.setText(self.dir.relativeFilePath(edit_item.image))
+        self.ui.ratingInput.setText(str(edit_item.rating))
