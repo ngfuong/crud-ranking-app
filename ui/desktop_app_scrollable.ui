@@ -383,7 +383,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QToolButton" name="exitButton_1">
+           <widget class="QToolButton" name="exitButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
