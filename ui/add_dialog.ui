@@ -113,7 +113,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="releasedateInput">
+          <widget class="QDateEdit" name="releasedateInput">
            <property name="maximumSize">
             <size>
              <width>200</width>
@@ -160,9 +160,15 @@
          </item>
          <item>
           <widget class="QToolButton" name="uploadImgButton">
-           <property name="maximumSize">
+           <property name="minimumSize">
             <size>
              <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
              <height>16777215</height>
             </size>
            </property>

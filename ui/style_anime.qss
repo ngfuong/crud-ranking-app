@@ -1,6 +1,7 @@
     #animeCol QLabel{
         border: none;
         color: #fff;
+        font-size: 15;
         font-family: Helvetica, sans-serif;
     }
 

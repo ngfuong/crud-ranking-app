@@ -1,7 +1,7 @@
 import operator
 from datetime import datetime
 
-from data.data_io import load_json_data, write_json_data
+from app.data_io import load_json_data, write_json_data
 
 
 class AnimeItem:
@@ -13,29 +13,26 @@ class AnimeItem:
         self.rating = float(rating)
 
     def __str__(self):
-        return f"{self.title}\t{self.release_date}\t{self.image==True}\t{self.rating}"
+        return f"{self.title}\t{self.release_date}\t{bool(self.image)}\t{self.rating}"
     
     def update(self, new_data):
         # Empty field is not updated
         for k, v in new_data.items():
             if v:
                 setattr(self, k, v)
-    
-def format_date(date_text):
-    return datetime.strptime(date_text, '%b %Y')
-        
 
-"""
-data.json item example 
-    {
-        "id": 1,
-        "title": "Sousou no Frieren",
-        "release_date": "Sep 2023",
-        "image": "https://cdn.myanimelist.net/r/100x140/images/anime/1015/138006.webp?s=a7e9bb2976a01ff4edcdede0e7ad15e8",
-        "rating": "None"
-    },
-"""
+
 class AnimeDatabase:
+    """
+    data.json item example 
+        {
+            "id": 1,
+            "title": "Sousou no Frieren",
+            "release_date": "Sep 2023",
+            "image": "https://cdn.myanimelist.net/r/100x140/images/anime/1015/138006.webp?s=a7e9bb2976a01ff4edcdede0e7ad15e8",
+            "rating": "None"
+        },
+    """
     def __init__(self):
         self.anime_item_list = list()
         self.anime_dict_data = load_json_data()
@@ -83,10 +80,17 @@ class AnimeDatabase:
         self.anime_item_list.remove(anime_delete)
         self.anime_dict_data = self.item_to_data()
         write_json_data(self.anime_dict_data)
+    
+    def search_by_title(self, search_title) -> list[AnimeItem]:
+        matched_items = []
+        for anime_item in self.anime_item_list:
+            if search_title in anime_item.title:
+                matched_items.append(anime_item)
+        return matched_items
 
     def sort_item_by_rating(self, top=None):
         self.anime_item_list = sorted(self.anime_item_list, 
-                                      key=operator.attrgetter('rating'), 
+                                      key=operator.attrgetter('rating'),
                                       reverse=True
                                       )
         if top:
@@ -109,3 +113,9 @@ class AnimeDatabase:
     def get_title_list(self):
         titles = [anime["title"] for anime in self.anime_dict_data]
         return titles
+
+def format_date(date_text):
+    return datetime.strptime(date_text, '%b %Y')
+
+def date_to_text(date:datetime):
+    return date.strftime("%b %Y")
