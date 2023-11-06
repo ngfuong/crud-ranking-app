@@ -5,9 +5,10 @@
                                                 stop:1 #000);
     }
     QLabel {
-        font-size: 12;
+        font-size: 15;
         color: #fff;
-        font-family: 'Soliden Trial';
+        font-family: 'Soliden Trial', Arial, Helvetica, sans-serif;
+        font-weight: 600;
     }
     
     /* #buttonBox, QToolButton {

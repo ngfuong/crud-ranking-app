@@ -605,7 +605,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="homePage">
           <layout class="QGridLayout" name="gridLayout_2">
@@ -751,14 +751,20 @@
                  <property name="spacing">
                   <number>5</number>
                  </property>
+                 <property name="leftMargin">
+                  <number>25</number>
+                 </property>
                  <property name="topMargin">
                   <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>25</number>
                  </property>
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QPushButton" name="sortRankButton">
+                  <widget class="QToolButton" name="sortRankButton">
                    <property name="minimumSize">
                     <size>
                      <width>100</width>
@@ -768,10 +774,16 @@
                    <property name="text">
                     <string>TOP ANIME</string>
                    </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="sortDateButton">
+                  <widget class="QToolButton" name="sortDateButton">
                    <property name="minimumSize">
                     <size>
                      <width>100</width>
@@ -781,10 +793,16 @@
                    <property name="text">
                     <string>LATEST</string>
                    </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="AtoZButton">
+                  <widget class="QToolButton" name="AtoZButton">
                    <property name="minimumSize">
                     <size>
                      <width>100</width>
@@ -793,6 +811,12 @@
                    </property>
                    <property name="text">
                     <string>A-Z</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>
@@ -879,7 +903,7 @@
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QFrame" name="manageMenu">
+            <widget class="QFrame" name="CRUDMenu">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
@@ -895,6 +919,12 @@
               </property>
               <item>
                <widget class="QPushButton" name="searchAnime">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>SEARCH</string>
                 </property>
@@ -907,7 +937,7 @@
                <widget class="QPushButton" name="addButton">
                 <property name="minimumSize">
                  <size>
-                  <width>80</width>
+                  <width>100</width>
                   <height>0</height>
                  </size>
                 </property>
@@ -920,7 +950,7 @@
                <widget class="QPushButton" name="editButton">
                 <property name="minimumSize">
                  <size>
-                  <width>80</width>
+                  <width>100</width>
                   <height>0</height>
                  </size>
                 </property>
@@ -933,7 +963,7 @@
                <widget class="QPushButton" name="removeButton">
                 <property name="minimumSize">
                  <size>
-                  <width>80</width>
+                  <width>100</width>
                   <height>0</height>
                  </size>
                 </property>

@@ -82,7 +82,7 @@ class Ui_AddDialog(object):
         self.horizontalLayout_3.addWidget(self.imageLabel)
         self.uploadImgButton = QtWidgets.QToolButton(parent=self.imageFrame)
         self.uploadImgButton.setMinimumSize(QtCore.QSize(100, 0))
-        self.uploadImgButton.setMaximumSize(QtCore.QSize(200, 16777215))
+        self.uploadImgButton.setMaximumSize(QtCore.QSize(100, 16777215))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.uploadImgButton.setFont(font)
