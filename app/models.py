@@ -1,7 +1,7 @@
 import operator
 from datetime import datetime
 
-from modules.data_io import load_json_data, write_json_data
+from app.data_io import load_json_data, write_json_data
 
 
 class AnimeItem:
@@ -79,6 +79,13 @@ class AnimeDatabase:
         self.anime_item_list.remove(anime_delete)
         self.anime_dict_data = self.item_to_data()
         write_json_data(self.anime_dict_data)
+    
+    def search_by_title(self, search_title) -> list[AnimeItem]:
+        matched_items = []
+        for anime_item in self.anime_item_list:
+            if search_title in anime_item.title:
+                matched_items.append(anime_item)
+        return matched_items
 
     def sort_item_by_rating(self, top=None):
         self.anime_item_list = sorted(self.anime_item_list, 

@@ -5,9 +5,9 @@ from PyQt6.QtGui import QPixmap, QIcon
 from config import Config
 from ui.desktop_app_scrollable_ui import Ui_MainWindow
 
-from modules.widgets.models import AnimeDatabase
-from modules.widgets.anime import AnimeItemWidget
-from modules.widgets.dialog import AddDialog, EditDialog
+from app.models import AnimeDatabase
+from app.widgets.anime import AnimeItemWidget
+from app.widgets.dialog import AddDialog, EditDialog
 
 
 class MainWindow(QMainWindow):
@@ -27,9 +27,10 @@ class MainWindow(QMainWindow):
         self.dtb = AnimeDatabase()
         database = self.dtb
 
-        global horizontal_layout
+        global h_layout 
         self.horizontal_layout = QHBoxLayout(widgets.animeListWidget)
-        horizontal_layout = self.horizontal_layout
+        h_layout = self.horizontal_layout
+        self.layout = AnimeHorizontalLayout()
 
         widgets.stackedWidget.setCurrentIndex(Config.HOME_PAGE_INDEX)
         self.setup_leftMenu()
@@ -51,17 +52,26 @@ class MainWindow(QMainWindow):
         widgets.searchAnime.clicked.connect(lambda:AnimeCRUD.search(self))
 
     def setup_rank_page(self):
-        AnimeHorizontalLayout.display_layout(self)
-        widgets.sortRankButton.clicked.connect(lambda:AnimeHorizontalLayout.sort_by_rating(self))
-        widgets.sortDateButton.clicked.connect(lambda:AnimeHorizontalLayout.sort_by_date(self))
-        widgets.AtoZButton.clicked.connect(lambda:AnimeHorizontalLayout.sort_by_alphabet(self))
+        self.layout.display_layout()
+        widgets.sortRankButton.clicked.connect(lambda:self.layout.sort_by_rating())
+        widgets.sortDateButton.clicked.connect(lambda:self.layout.sort_by_date())
+        widgets.AtoZButton.clicked.connect(lambda:self.layout.sort_by_alphabet())
 
     def on_searchButton_clicked(self):
-        widgets.stackedWidget.setCurrentIndex(Config.SEARCH_ANIME_INDEX)
+        widgets.stackedWidget.setCurrentIndex(Config.RANK_PAGE_INDEX) #???
         search_text = widgets.searchInput.text().strip()
+
         if search_text:
-            formatted_text = f"Searching for \"{search_text}\"..."
-            widgets.search_text.setText(formatted_text)
+            matched_items = database.search_by_title(search_text)
+            self.layout.clear_layout()
+            if len(matched_items) != 0:
+                formatted_text = f"Search results for \"{search_text}\""
+                self.layout.update_layout(item_list=matched_items)
+            else:
+                formatted_text = f"No results for \"{search_text}\""
+            
+            widgets.searchInput.setPlaceholderText(formatted_text)
+            return matched_items
 
     def on_userButton_clicked(self):
         widgets.stackedWidget.setCurrentIndex(Config.USER_PAGE_INDEX)
@@ -77,7 +87,9 @@ class MainWindow(QMainWindow):
 
     def on_rankButton_toggled(self):
         widgets.stackedWidget.setCurrentIndex(Config.RANK_PAGE_INDEX)
-        AnimeHorizontalLayout.update_layout(self)
+    
+    def on_rankButton_clicked(self):
+        self.layout.update_layout()
 
     def on_exitButton_clicked(self):
         QApplication.quit()
@@ -159,26 +171,33 @@ class AnimeHorizontalLayout():
     def display_layout(self):
         for anime in database.anime_item_list:
             anime_item_widget = AnimeItemWidget(anime)
-            horizontal_layout.addWidget(anime_item_widget)
-        widgets.animeListWidget.setLayout(horizontal_layout)
-
-    def update_layout(self):
-        while horizontal_layout.count():
-            child = horizontal_layout.takeAt(0)
+            h_layout.addWidget(anime_item_widget)
+        widgets.animeListWidget.setLayout(h_layout)
+    
+    def clear_layout(self):
+        while h_layout.count():
+            child = h_layout.takeAt(0)
             if child.widget():
                 child.widget().deleteLater()
-        for anime in database.anime_item_list:
+
+    def update_layout(self, item_list=None):
+        self.clear_layout()
+        
+        if item_list is None:
+            item_list = database.anime_item_list
+        # Update layout from custom item list
+        for anime in item_list:
             anime_item_widget = AnimeItemWidget(anime)
-            horizontal_layout.addWidget(anime_item_widget)
+            h_layout.addWidget(anime_item_widget)
 
     def sort_by_rating(self):
         database.sort_item_by_rating()
-        AnimeHorizontalLayout.update_layout(self)
+        self.update_layout()
 
     def sort_by_date(self):
         database.sort_item_by_date()
-        AnimeHorizontalLayout.update_layout(self)
+        self.update_layout()
     
     def sort_by_alphabet(self):
         database.sort_item_by_title()
-        AnimeHorizontalLayout.update_layout(self)
+        self.update_layout()

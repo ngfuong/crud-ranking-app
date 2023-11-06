@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QGraphicsDropShadowEffect
 
 from config import Config
 from ui.anime_column_ui import Ui_AnimeColumn
-from .models import AnimeItem
+from app.models import AnimeItem
 
 
 class AnimeItemWidget(QWidget, Ui_AnimeColumn):
@@ -33,6 +33,7 @@ class AnimeItemWidget(QWidget, Ui_AnimeColumn):
         self.ui.animeTitle.setText(self.anime.title)
         self.ui.animeInfo.setText(description_text)
         self.ui.animeView.setPixmap(img_pixmap)
+
 
 class Animation:
     def drop_shadow_on(self, target_widget):

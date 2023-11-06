@@ -120,7 +120,6 @@
     #rankMenu QPushButton:hover {
         border: 2px solid #fff;
         border-radius: 5%;
-        padding: -2px;
     }
 
     QScrollArea {

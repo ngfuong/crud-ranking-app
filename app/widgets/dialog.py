@@ -5,7 +5,7 @@ from config import Config
 from ui.add_dialog_ui import Ui_AddDialog
 from ui.edit_dialog_ui import Ui_EditDialog
 
-from .models import AnimeItem
+from app.models import AnimeItem
 
 
 class Dialog(QtWidgets.QDialog):
