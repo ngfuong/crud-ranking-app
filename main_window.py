@@ -30,6 +30,7 @@ class MainWindow(QMainWindow):
         global h_layout 
         self.horizontal_layout = QHBoxLayout(widgets.animeListWidget)
         h_layout = self.horizontal_layout
+        h_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.layout = AnimeHorizontalLayout()
 
         widgets.stackedWidget.setCurrentIndex(Config.HOME_PAGE_INDEX)
@@ -80,7 +81,7 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentIndex(Config.HOME_PAGE_INDEX)
 
     def on_tvshowsButton_toggled(self):
-        widgets.stackedWidget.setCurrentIndex(Config.TV_SHOW_INDEX)
+        widgets.stackedWidget.setCurrentIndex(Config.TVSHOW_PAGE_INDEX)
 
     def on_CRUDButton_toggled(self):
         widgets.stackedWidget.setCurrentIndex(Config.CRUD_MENU_INDEX)

@@ -101,7 +101,7 @@
         color: #000;
     }
 
-    #moviesPage QListWidget{
+    #CRUDPage QListWidget{
         color: #000;
         border-bottom: 1px solid #fff;
     }
