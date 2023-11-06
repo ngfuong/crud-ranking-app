@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
         self.logoLabel_1.setMaximumSize(QtCore.QSize(50, 50))
         self.logoLabel_1.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.logoLabel_1.setText("")
-        self.logoLabel_1.setPixmap(QtGui.QPixmap("ui\\../icons/sidebar/Crunchyroll_Logo.png"))
+        self.logoLabel_1.setPixmap(QtGui.QPixmap("ui\\sidebar/Crunchyroll_Logo.png"))
         self.logoLabel_1.setScaledContents(True)
         self.logoLabel_1.setObjectName("logoLabel_1")
         self.horizontalLayout.addWidget(self.logoLabel_1)
