@@ -18,7 +18,7 @@ class Dialog(QDialog):
     def __init__(self, dialog_type):
         super().__init__()
         self.ui = None
-        
+
         with open(self.STYLE_LOCATION, "r") as style_file:
             style_config = style_file.read()
         self.setStyleSheet(style_config)
@@ -33,7 +33,7 @@ class Dialog(QDialog):
                                             )
         self.ui.uploadImgButton.setText(fname[0])
         return fname
-    
+
     def return_input_fields(self) -> dict:
         date_input = self.ui.releasedateInput.date().toPyDate() # formatted YYYY-mm-dd
         image_path_input = self.ui.uploadImgButton.text()
@@ -49,7 +49,7 @@ class Dialog(QDialog):
             "rating": float(self.ui.ratingInput.text()),
             "link": url_input
         }
-    
+
 
 class AddDialog(Dialog):
     """
@@ -69,6 +69,7 @@ class AddDialog(Dialog):
 
         self.ui.uploadImgButton.clicked.connect(lambda: self._browse_files())
         self.ui.releasedateInput.setDisplayFormat("dd/MM/yyyy")
+
 
 class EditDialog(Dialog):
     """
