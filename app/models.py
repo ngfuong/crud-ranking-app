@@ -24,17 +24,6 @@ class AnimeItem:
 
 
 class AnimeDatabase:
-    """
-    data.json item example 
-        {
-            "id": 1,
-            "title": "Sousou no Frieren",
-            "release_date": "Sep 2023",
-            "image": "https://cdn.myanimelist.net/r/100x140/images/anime/1015/138006.webp?s=a7e9bb2976a01ff4edcdede0e7ad15e8",
-            "rating": 9,
-            "link": "https://www.crunchyroll.com/series/GG5H5XQX4/frieren-beyond-journeys-end"
-        },
-    """
     def __init__(self):
         self.anime_item_list = list()
         self.anime_dict_data = load_json_data()

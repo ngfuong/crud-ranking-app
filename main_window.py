@@ -1,11 +1,15 @@
 import os
 
+from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QHBoxLayout
 from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt
 from PyQt6.QtGui import QPixmap, QIcon
 
 from config import Config
-from ui.desktop_app_scrollable_ui import Ui_MainWindow
+try:
+    from ui.desktop_app_scrollable_ui import Ui_MainWindow
+except ImportError:
+    pass
 
 from app.models import AnimeDatabase
 from app.widgets.anime import AnimeItemWidget
@@ -13,16 +17,21 @@ from app.widgets.dialog import AddDialog, EditDialog
 
 
 class MainWindow(QMainWindow):
+    UI_LOCATION = os.path.join(Config.UI_DIR, "main_window.ui")
     STYLE_LOCATION = os.path.join(Config.UI_DIR, "style_main.qss")
     def __init__(self):
         super(MainWindow, self).__init__()
+        try:
+            self.ui = uic.loadUi(self.UI_LOCATION, self)
+        except FileNotFoundError:
+            self.ui = Ui_MainWindow()
+            self.ui.setupUi(self)
+
         with open(self.STYLE_LOCATION, "r") as style_file:
             style_config = style_file.read()
         self.setStyleSheet(style_config)
 
         global widgets
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
         widgets = self.ui
 
         global database

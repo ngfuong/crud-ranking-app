@@ -1,3 +1,4 @@
+*.exe
 .env/
 .env-wls/
 __pycache__/

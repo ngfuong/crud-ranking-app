@@ -1,12 +1,15 @@
 import os
 
-from PyQt6.uic import load_ui
+from PyQt6 import uic
 from PyQt6.QtWidgets import QDialog, QFileDialog
 from PyQt6.QtCore import QDate, QDir
 
 from config import Config
-from ui.add_dialog_ui import Ui_AddDialog
-from ui.edit_dialog_ui import Ui_EditDialog
+try:
+    from ui.add_dialog_ui import Ui_AddDialog
+    from ui.edit_dialog_ui import Ui_EditDialog
+except ImportError:
+    pass
 
 from app.models import AnimeItem
 from app.models import date_to_text, format_date
@@ -60,14 +63,11 @@ class AddDialog(Dialog):
     UI_LOCATION = os.path.join(Config.UI_DIR, "add_dialog.ui")
     def __init__(self):
         super().__init__(AddDialog)
-        if isinstance(self.ui, Ui_AddDialog):
-            pass
-        else:
-            try:
-                self.ui = Ui_AddDialog()
-                self.ui.setupUi(self)
-            except NameError:
-                self.ui = load_ui.loadUi(self.UI_LOCATION)
+        try:
+            self.ui = uic.loadUi(self.UI_LOCATION, self)
+        except FileNotFoundError:
+            self.ui = Ui_AddDialog()
+            self.ui.setupUi(self)
 
         self.ui.uploadImgButton.clicked.connect(lambda: self._browse_files())
         self.ui.releasedateInput.setDisplayFormat("dd/MM/yyyy")
@@ -81,10 +81,10 @@ class EditDialog(Dialog):
     def __init__(self, edit_item:AnimeItem):
         super().__init__(EditDialog)
         try:
+            self.ui = uic.loadUi(self.UI_LOCATION, self)
+        except NameError:
             self.ui = Ui_EditDialog()
             self.ui.setupUi(self)
-        except NameError:
-            self.ui = load_ui.loadUi(self.UI_LOCATION)
 
         self.ui.releasedateInput.setDisplayFormat("dd/MM/yyyy")
         self.ui.uploadImgButton.clicked.connect(lambda: self._browse_files())

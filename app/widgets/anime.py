@@ -1,25 +1,28 @@
 import webbrowser
 import os
 
-from PyQt6.uic import load_ui
+from PyQt6 import uic
 from PyQt6.QtGui import QPixmap, QColorConstants
 from PyQt6.QtWidgets import QWidget, QLabel, QGraphicsDropShadowEffect
 
 from config import Config
-from ui.anime_column_ui import Ui_AnimeColumn
+try:
+    from ui.anime_column_ui import Ui_AnimeColumn
+except ImportError:
+    pass
 from app.models import AnimeItem
 
 
-class AnimeItemWidget(QWidget, Ui_AnimeColumn):
+class AnimeItemWidget(QWidget):
     STYLE_LOCATION = os.path.join(Config.UI_DIR, "style_anime.qss")
     UI_LOCATION = os.path.join(Config.UI_DIR, "anime_column.ui")
     def __init__(self, anime:AnimeItem):
         QWidget.__init__(self)
         try:
+            self.ui = uic.loadUi(self.UI_LOCATION, self)
+        except FileNotFoundError:
             self.ui = Ui_AnimeColumn()
             self.ui.setupUi(self)
-        except NameError:
-            self.ui = load_ui.loadUi(self.UI_LOCATION)
 
         with open(self.STYLE_LOCATION, "r") as style_file:
             style_config = style_file.read()
