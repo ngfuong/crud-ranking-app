@@ -35,14 +35,19 @@ class Dialog(QDialog):
         return fname
     
     def return_input_fields(self) -> dict:
-        date = self.ui.releasedateInput.date().toPyDate()
-        image_path = self.ui.uploadImgButton.text()
-        # 1997-07-01
+        date_input = self.ui.releasedateInput.date().toPyDate() # formatted YYYY-mm-dd
+        image_path_input = self.ui.uploadImgButton.text()
+        if self.ui.urlInput.text():
+            url_input = self.ui.urlInput.text()
+        else:
+            url_input = "None"
+
         return {
             "title": self.ui.titleInput.text(),
-            "release_date": date_to_text(date),
-            "image": self.dir.relativeFilePath(image_path),
-            "rating": float(self.ui.ratingInput.text())
+            "release_date": date_to_text(date_input),
+            "image": self.dir.relativeFilePath(image_path_input),
+            "rating": float(self.ui.ratingInput.text()),
+            "link": url_input
         }
     
 
@@ -86,3 +91,4 @@ class EditDialog(Dialog):
         self.ui.releasedateInput.setDate(QDate(date.year, date.month, date.day))
         self.ui.uploadImgButton.setText(self.dir.relativeFilePath(edit_item.image))
         self.ui.ratingInput.setText(str(edit_item.rating))
+        self.ui.urlInput.setText(edit_item.link)

@@ -5,15 +5,16 @@ from app.data_io import load_json_data, write_json_data
 
 
 class AnimeItem:
-    def __init__(self, anime_id, title, release_date, image=None, rating=None):
+    def __init__(self, anime_id, title, release_date, image=None, rating=None, link=None):
         self.id = anime_id
         self.title = title
         self.release_date = release_date
         self.image = image
         self.rating = float(rating)
+        self.link = link
 
     def __str__(self):
-        return f"{self.title}\t{self.release_date}\t{bool(self.image)}\t{self.rating}"
+        return f"{self.title}\t{self.release_date}\t{bool(self.image)}\t{self.rating}\t{self.link}"
     
     def update(self, new_data):
         # Empty field is not updated
@@ -30,7 +31,8 @@ class AnimeDatabase:
             "title": "Sousou no Frieren",
             "release_date": "Sep 2023",
             "image": "https://cdn.myanimelist.net/r/100x140/images/anime/1015/138006.webp?s=a7e9bb2976a01ff4edcdede0e7ad15e8",
-            "rating": "None"
+            "rating": 9,
+            "link": "https://www.crunchyroll.com/series/GG5H5XQX4/frieren-beyond-journeys-end"
         },
     """
     def __init__(self):
@@ -50,7 +52,8 @@ class AnimeDatabase:
                           title=anime_dict["title"],
                           release_date=anime_dict["release_date"],
                           image=anime_dict["image"],
-                          rating=anime_dict["rating"])
+                          rating=anime_dict["rating"],
+                          link=anime_dict["link"])
             self.anime_item_list.append(anime)
 
     def get_item_by_title(self, anime_title) -> AnimeItem:
@@ -64,7 +67,8 @@ class AnimeDatabase:
                              title=anime_dict["title"],
                              release_date=anime_dict["release_date"],
                              image=anime_dict["image"],
-                             rating=anime_dict["rating"])
+                             rating=anime_dict["rating"],
+                             link=anime_dict["link"])
         self.anime_item_list.append(new_item)
         self.anime_dict_data.append(anime_dict)
         write_json_data(self.anime_dict_data)

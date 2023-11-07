@@ -1,10 +1,12 @@
+import webbrowser
+
 from PyQt6.uic import load_ui
 from PyQt6.QtGui import QPixmap, QColorConstants
 from PyQt6.QtWidgets import QWidget, QLabel, QGraphicsDropShadowEffect
 
 from config import Config
 from ui.anime_column_ui import Ui_AnimeColumn
-from app.models import AnimeItem, date_to_text
+from app.models import AnimeItem
 
 
 class AnimeItemWidget(QWidget, Ui_AnimeColumn):
@@ -23,8 +25,12 @@ class AnimeItemWidget(QWidget, Ui_AnimeColumn):
         self.setStyleSheet(style_config)
 
         self.anime = anime
-        Animation.drop_shadow_on_hovered(self, self)
         self.display_description()
+
+        Animation.drop_shadow_on_hovered(self, self)
+        self.ui.animeCol.mouseDoubleClickEvent = lambda x: self.open_link(self.anime.link)
+        if self.anime.link != 'None':
+            self.ui.animeCol.setToolTip("Double click to watch")
 
     def display_description(self):
         description_text = self.anime.release_date + "\n" \
@@ -33,6 +39,10 @@ class AnimeItemWidget(QWidget, Ui_AnimeColumn):
         self.ui.animeTitle.setText(self.anime.title)
         self.ui.animeInfo.setText(description_text)
         self.ui.animeView.setPixmap(img_pixmap)
+
+    def open_link(self, url):
+        if url != 'None':
+            webbrowser.open(url)
 
 
 class Animation:
