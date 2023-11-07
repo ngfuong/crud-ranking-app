@@ -1,4 +1,5 @@
 import webbrowser
+import os
 
 from PyQt6.uic import load_ui
 from PyQt6.QtGui import QPixmap, QColorConstants
@@ -10,8 +11,8 @@ from app.models import AnimeItem
 
 
 class AnimeItemWidget(QWidget, Ui_AnimeColumn):
-    UI_LOCATION = f"{Config.LOCAL_DIR}/ui/anime_column.ui"
-    STYLE_LOCATION = f"{Config.LOCAL_DIR}/ui/style_anime.qss"
+    STYLE_LOCATION = os.path.join(Config.UI_DIR, "style_anime.qss")
+    UI_LOCATION = os.path.join(Config.UI_DIR, "anime_column.ui")
     def __init__(self, anime:AnimeItem):
         QWidget.__init__(self)
         try:

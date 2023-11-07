@@ -1,3 +1,5 @@
+import os
+
 from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QHBoxLayout
 from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt
 from PyQt6.QtGui import QPixmap, QIcon
@@ -11,7 +13,7 @@ from app.widgets.dialog import AddDialog, EditDialog
 
 
 class MainWindow(QMainWindow):
-    STYLE_LOCATION = f"{Config.LOCAL_DIR}/ui/style_main.qss"
+    STYLE_LOCATION = os.path.join(Config.UI_DIR, "style_main.qss")
     def __init__(self):
         super(MainWindow, self).__init__()
         with open(self.STYLE_LOCATION, "r") as style_file:

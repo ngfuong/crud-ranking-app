@@ -2,7 +2,9 @@ import os
 
 
 class Config():
-    LOCAL_DIR = os.path.dirname(os.path.realpath(__file__)) + '/'
+    LOCAL_DIR = os.getcwd()
+    UI_DIR = os.path.join(LOCAL_DIR, "ui")
+
     JSON_PATH = 'data/data.json'
     
     MENU_COLLAPSED_WIDTH = 50
