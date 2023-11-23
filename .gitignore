@@ -1,4 +1,5 @@
 *.exe
+resources.*
 .env/
-.env-wls/
+.env-win/
 __pycache__/

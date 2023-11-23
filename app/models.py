@@ -10,22 +10,19 @@ class AnimeItem:
         self.title = title
         self.release_date = release_date
         self.image = image
-        self.rating = float(rating)
+        self.rating = float(rating) if rating else 0
         self.link = link
 
-    def __str__(self):
-        return f"{self.title}\t{self.release_date}\t{bool(self.image)}\t{self.rating}\t{self.link}"
-    
-    def update(self, new_data):
+    def update(self, new_data:dict):
         # Empty field is not updated
-        for k, v in new_data.items():
-            if v:
-                setattr(self, k, v)
+        for attribute, value in new_data.items():
+            if value:
+                setattr(self, attribute, value)
 
 
 class AnimeDatabase:
-    def __init__(self):
-        self.anime_item_list = list()
+    def __init__(self, animes=[]):
+        self.anime_item_list = animes
         self.anime_dict_data = load_json_data()
         self.anime_title_list = self.get_title_list()
     

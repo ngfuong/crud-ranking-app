@@ -167,7 +167,7 @@ class AnimeCRUD():
             database.delete_item(item_title)
 
     def search(self):
-        search_anime_field = widgets.inputAnime.text().strip()
+        search_anime_field = widgets.inputAnime.text().strip().lower()
         if search_anime_field:
             matched_items = widgets.animeList.findItems(search_anime_field, Qt.MatchFlag.MatchContains)
             for i in range(widgets.animeList.count()):
