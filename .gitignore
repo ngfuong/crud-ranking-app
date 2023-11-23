@@ -3,3 +3,4 @@ resources.*
 .env/
 .env-win/
 __pycache__/
+*.Identifier
