@@ -21,8 +21,8 @@ class AnimeItem:
 
 
 class AnimeDatabase:
-    def __init__(self, animes=[]):
-        self.anime_item_list = animes
+    def __init__(self):
+        self.anime_item_list = list()
         self.anime_dict_data = load_json_data()
         self.anime_title_list = self.get_title_list()
     
@@ -74,7 +74,7 @@ class AnimeDatabase:
     def search_by_title(self, search_title) -> list[AnimeItem]:
         matched_items = []
         for anime_item in self.anime_item_list:
-            if search_title in anime_item.title:
+            if search_title in anime_item.title.lower():
                 matched_items.append(anime_item)
         return matched_items
 

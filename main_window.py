@@ -1,26 +1,34 @@
 import os
+import time
+import threading
 
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QHBoxLayout
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt
-from PyQt6.QtGui import QPixmap, QIcon
+from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QHBoxLayout, QLabel
+from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt, \
+                        QThreadPool
+from PyQt6.QtGui import QPixmap, QIcon, QMovie
 
 from config import Config
 try:
-    from ui.desktop_app_scrollable_ui import Ui_MainWindow
+    from ui.ui_main_window import Ui_MainWindow
 except ImportError:
     pass
 
 from app.models import AnimeDatabase
 from app.widgets.anime import AnimeItemWidget
 from app.widgets.dialog import AddDialog, EditDialog
+from app.threading import Worker
+
+import speech_recognition as sr
+from playsound import playsound
 
 
 class MainWindow(QMainWindow):
     UI_LOCATION = os.path.join(Config.UI_DIR, "main_window.ui")
     STYLE_LOCATION = os.path.join(Config.UI_DIR, "style_main.qss")
-    def __init__(self):
+    def __init__(self, parent:QApplication):
         super(MainWindow, self).__init__()
+        self.app = parent
         try:
             self.ui = uic.loadUi(self.UI_LOCATION, self)
         except FileNotFoundError:
@@ -48,6 +56,17 @@ class MainWindow(QMainWindow):
         self.setup_leftMenu()
         self.setup_CRUD_page()
         self.setup_rank_page()
+        
+        self.speech = ""
+        self.sttPrevPixmap = widgets.sttLabel.pixmap()
+        # Display ui first
+        self.show()
+
+        # Handle multithreading
+        self.threadpool = QThreadPool()
+        # self.threadpool.setMaxThreadCount(2)
+        print(f"Multithreading with maximum {self.threadpool.maxThreadCount()} threads...")
+        self.setup_stt()
 
     def setup_leftMenu(self):
         widgets.leftMenu.show()
@@ -68,9 +87,70 @@ class MainWindow(QMainWindow):
         widgets.sortRankButton.clicked.connect(lambda:self.layout.sort_by_rating())
         widgets.sortDateButton.clicked.connect(lambda:self.layout.sort_by_date())
         widgets.AtoZButton.clicked.connect(lambda:self.layout.sort_by_alphabet())
+    
+    def setup_stt(self):
+        widgets.sttLabel.mousePressEvent = lambda x: self.on_listening_started()
 
+    def thread_complete(self, val='finished'):
+        print(f'def thread_complete(self, obj): {val}')
+        self.gif.stop()                                  # <---- +++
+        self.ui.sttLabel.setPixmap(self.sttPrevPixmap)
+        if self.speech:
+            self.on_speech_recognized()
+    
+    def progress_fn(self, val):
+        print(f'def progress_fn(self, obj): {val}')
+
+
+    def on_listening_started(self):
+        self.gif = QMovie(Config.GIF_PATH)
+        self.gif.setSpeed(100)
+        widgets.sttLabel.setMovie(self.gif)
+        self.gif.start()
+        # Function to execute TTS
+        worker = Worker(self.get_voice_input)
+        worker.signals.finished.connect(self.thread_complete)
+        self.threadpool.start(worker)
+
+    def get_voice_input(self):
+        """
+        Text-to-speech
+        """
+        self.speech = ""
+        r = sr.Recognizer()
+        with sr.Microphone(device_index=Config.MICROPHONE_INDEX) as source:
+            print("Say something!")
+            playsound("ui/assets/voice.mp3")
+            audio = r.listen(source, phrase_time_limit=3)
+
+        try:
+            self.speech = r.recognize_google(audio)
+            print("Google Speech Recognition thinks you said " + self.speech)
+        except sr.UnknownValueError:
+            print("Google Speech Recognition could not understand audio")
+        except sr.RequestError as e:
+            print("Could not request results from Google Speech Recognition service; {0}".format(e))
+        
+        return self.speech
+
+    def print_output(self, obj):
+        print(f'def print_output(self, obj): {obj}')
+
+    def on_speech_recognized(self):
+        self.speech = self.speech.strip().lower()
+        widgets.stackedWidget.setCurrentIndex(Config.RANK_PAGE_INDEX)
+        widgets.searchInput.setText(self.speech)
+        matched_items = database.search_by_title(self.speech)
+        if len(matched_items) != 0:
+            formatted_text = f"Search results for \"{self.speech}\""
+            self.layout.update_layout(item_list=matched_items)
+        else:
+            formatted_text = f"No results for \"{self.speech}\""
+        
+        widgets.searchInput.setPlaceholderText(formatted_text)
+    
     def on_searchButton_clicked(self):
-        widgets.stackedWidget.setCurrentIndex(Config.RANK_PAGE_INDEX) #???
+        widgets.stackedWidget.setCurrentIndex(Config.RANK_PAGE_INDEX)
         search_text = widgets.searchInput.text().strip()
 
         if search_text:
@@ -133,6 +213,7 @@ class MainWindow(QMainWindow):
 
 
 class AnimeCRUD():
+
     def add(self):
         currIndex = widgets.animeList.currentRow()
         add_dialog = AddDialog()

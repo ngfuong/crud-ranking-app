@@ -22,3 +22,6 @@ class Config():
     TVSHOW_PAGE_INDEX = 3
     USER_PAGE_INDEX = 4
     SEARCH_ANIME_INDEX = 5
+
+    MICROPHONE_INDEX = 1
+    GIF_PATH = "ui\header\loading-20.gif"

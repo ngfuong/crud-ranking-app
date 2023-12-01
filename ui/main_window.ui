@@ -99,7 +99,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>sidebar/Crunchyroll_Logo.png</pixmap>
+            <pixmap>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/Crunchyroll_Logo.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -124,7 +124,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>../icons/sidebar/crunchyroll_text.png</pixmap>
+            <pixmap>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/crunchyroll_text.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -167,8 +167,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <selectedoff>sidebar/bars-solid-f26419.svg</selectedoff>
-             </iconset>
+              <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/header/bars-solid-f26419.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/header/bars-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -206,7 +205,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>sidebar/house-solid-f26419.svg</normaloff>sidebar/house-solid-f26419.svg</iconset>
+              <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/house-solid-f26419.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/house-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -247,7 +246,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>sidebar/ranking-star-solid-f26419.svg</normaloff>sidebar/ranking-star-solid-f26419.svg</iconset>
+              <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/ranking-star-solid-f26419.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/ranking-star-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -288,7 +287,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>sidebar/film-solid-f26419.svg</normaloff>sidebar/film-solid-f26419.svg</iconset>
+              <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/house-solid-f26419.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/house-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -329,7 +328,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>sidebar/tv-solid-f26419.svg</normaloff>sidebar/tv-solid-f26419.svg</iconset>
+              <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/tv-solid-f26419.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/tv-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -404,7 +403,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>sidebar/right-from-bracket-solid-f26419.svg</normaloff>sidebar/right-from-bracket-solid-f26419.svg</iconset>
+              <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/right-from-bracket-solid-f26419.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/right-from-bracket-solid-f26419.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -495,20 +494,81 @@
             <property name="spacing">
              <number>10</number>
             </property>
+            <property name="leftMargin">
+             <number>10</number>
+            </property>
             <property name="rightMargin">
              <number>0</number>
             </property>
             <item>
-             <widget class="QLineEdit" name="searchInput">
+             <widget class="QFrame" name="searchInputFrame">
               <property name="minimumSize">
                <size>
                 <width>400</width>
                 <height>30</height>
                </size>
               </property>
-              <property name="placeholderText">
-               <string>Search anime...</string>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
               </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>20</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>15</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item alignment="Qt::AlignVCenter">
+                <widget class="QLineEdit" name="searchInput">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Search anime...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="sttLabel">
+                 <property name="maximumSize">
+                  <size>
+                   <width>30</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap>header/microphone-solid-f26419.svg</pixmap>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>
@@ -524,7 +584,7 @@
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>header/magnifying-glass-solid-white.svg</normaloff>header/magnifying-glass-solid-white.svg</iconset>
+                <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/header/magnifying-glass-solid-white.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/header/magnifying-glass-solid-white.svg</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -586,7 +646,7 @@
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>header/user-solid-white.svg</normaloff>header/user-solid-white.svg</iconset>
+                 <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/header/user-solid-white.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/header/user-solid-white.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -605,7 +665,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="homePage">
           <layout class="QGridLayout" name="gridLayout_2">
@@ -694,7 +754,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap>assets/home_wallpaper.png</pixmap>
+                  <pixmap>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/assets/home_wallpaper.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -846,8 +906,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>904</width>
-                   <height>533</height>
+                   <width>98</width>
+                   <height>28</height>
                   </rect>
                  </property>
                 </widget>
@@ -1068,8 +1128,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="../../Modern_GUI_PyDracula_PySide6_or_PyQt6-master/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc"/>
-  <include location="resources.qrc"/>
+  <include location="//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

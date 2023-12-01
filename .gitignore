@@ -1,6 +1,5 @@
 *.exe
 resources.*
-.env/
-.env-win/
+.env*/
 __pycache__/
 *.Identifier
