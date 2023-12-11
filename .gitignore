@@ -3,3 +3,6 @@ resources.*
 .env*/
 __pycache__/
 *.Identifier
+*.spec
+build/
+dist/

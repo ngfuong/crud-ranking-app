@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
+  <Identity Name="CRUDRankingApp" 
+            Version="1.0.0.0" 
+            Publisher="CN=PhuongLN, O=MindXTechnologySchool, C=VN" 
+            ProcessorArchitecture="x64" />
+  <Properties>
+    <DisplayName>CRUDRankingApp</DisplayName>
+    <PublisherDisplayName>PhuongLN</PublisherDisplayName>
+    <Description>This app helps you rank, organize your favorite animes and watch them online!</Description>
+    <Logo>ui\sidebar\Crunchyroll_Logo.png</Logo>
+  </Properties>
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+  <Dependencies>
+    <TargetDeviceFamily 
+      Name="Windows.Desktop" 
+      MinVersion="10.0.14316.0"
+      MaxVersionTested="10.0.15063.0"
+    />
+      <!-- MinVersion="10.0.14393.0"  -->
+      <!-- MaxVersionTested="10.0.22621.0" -->
+  </Dependencies>
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust"/>
+  </Capabilities>
+  <Applications>
+    <Application Id="CRUDRankingApp" Executable="CRUDRankingApp.exe"
+      EntryPoint="windows.fullTrustApplication"
+    >
+      <uap:VisualElements 
+        DisplayName="CRUDRankingApp" 
+        Description="Anime Ranker and Organizer"	
+        Square150x150Logo="ui\sidebar\Crunchyroll_Logo_150x150.png"
+        Square44x44Logo="ui\sidebar\Crunchyroll_Logo_44x44.png" 
+        BackgroundColor="#f26419" />
+    </Application>
+  </Applications>
+</Package>

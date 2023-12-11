@@ -1,9 +1,7 @@
 import os
-import time
-import threading
 
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QHBoxLayout, QLabel
+from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QHBoxLayout 
 from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, Qt, \
                         QThreadPool
 from PyQt6.QtGui import QPixmap, QIcon, QMovie
@@ -220,19 +218,19 @@ class AnimeCRUD():
         if add_dialog.exec():
             inputs = add_dialog.return_input_fields()
             widgets.animeList.insertItem(currIndex, inputs["title"])
-            database.add_item_from_dict(inputs)
+            database.add_item(inputs)
 
     def edit(self):
         curr_index = widgets.animeList.currentRow()
         item = widgets.animeList.item(curr_index)
         item_title = item.text()
-        edit_item = database.get_item_by_title(item_title)
+        edit_item = database.get_first_item_by_title(item_title)
         if item is not None:
             edit_dialog = EditDialog(edit_item)
             if edit_dialog.exec():
                 inputs = edit_dialog.return_input_fields()
                 item.setText(inputs["title"])
-                database.edit_item_from_dict(item_title, inputs)
+                database.edit_item(item_title, inputs)
 
     def delete(self):
         curr_index = widgets.animeList.currentRow()

@@ -2,6 +2,7 @@ import os
 
 
 class Config():
+    # LOCAL_DIR = os.path.dirname(__file__)
     LOCAL_DIR = os.getcwd()
     UI_DIR = os.path.join(LOCAL_DIR, "ui")
 

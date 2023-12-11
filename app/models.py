@@ -26,7 +26,7 @@ class AnimeDatabase:
         self.anime_dict_data = load_json_data()
         self.anime_title_list = self.get_title_list()
     
-    def item_to_data(self):
+    def items_to_data(self):
         json_data = list()
         for anime in self.anime_item_list:
             json_data.append(anime.__dict__)
@@ -42,12 +42,14 @@ class AnimeDatabase:
                           link=anime_dict["link"])
             self.anime_item_list.append(anime)
 
-    def get_item_by_title(self, anime_title) -> AnimeItem:
+    def get_first_item_by_title(self, anime_title):
         for anime_item in self.anime_item_list:
             if anime_item.title == anime_title:
                 return anime_item
+        # No item found
+        return False
 
-    def add_item_from_dict(self, anime_dict):
+    def add_item(self, anime_dict):
         anime_dict["id"] = len(self.anime_item_list)
         new_item = AnimeItem(anime_id=anime_dict["id"],
                              title=anime_dict["title"],
@@ -59,17 +61,19 @@ class AnimeDatabase:
         self.anime_dict_data.append(anime_dict)
         write_json_data(self.anime_dict_data)
     
-    def edit_item_from_dict(self, edit_title, anime_dict: AnimeItem):
-        anime_edit = self.get_item_by_title(edit_title)
-        anime_edit.update(anime_dict)
-        self.anime_dict_data = self.item_to_data()
-        write_json_data(self.anime_dict_data)
+    def edit_item(self, edit_title, new_dict):
+        matched = self.get_first_item_by_title(edit_title)
+        if matched:
+            matched.update(new_dict)
+            self.anime_dict_data = self.items_to_data()
+            write_json_data(self.anime_dict_data)
     
     def delete_item(self, delete_title):
-        anime_delete = self.get_item_by_title(delete_title)
-        self.anime_item_list.remove(anime_delete)
-        self.anime_dict_data = self.item_to_data()
-        write_json_data(self.anime_dict_data)
+        matched = self.get_first_item_by_title(delete_title)
+        if matched:
+            self.anime_item_list.remove(matched)
+            self.anime_dict_data = self.items_to_data()
+            write_json_data(self.anime_dict_data)
     
     def search_by_title(self, search_title) -> list[AnimeItem]:
         matched_items = []
