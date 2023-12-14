@@ -306,47 +306,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QToolButton" name="tvshowsButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>       TV SHOWS</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/tv-solid-f26419.svg</normaloff>//wsl.localhost/Ubuntu/home/ngfuong/crud_ranking_app/ui/sidebar/tv-solid-f26419.svg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextBesideIcon</enum>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -906,8 +865,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>98</width>
-                   <height>28</height>
+                   <width>904</width>
+                   <height>533</height>
                   </rect>
                  </property>
                 </widget>
@@ -1040,17 +999,6 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tvshowsPage">
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>TV Shows Page</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
          <widget class="QWidget" name="userPage">
           <layout class="QGridLayout" name="gridLayout_6">
            <item row="0" column="0">
@@ -1058,63 +1006,6 @@
              <property name="text">
               <string>User Page</string>
              </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="searchPage">
-          <layout class="QGridLayout" name="gridLayout_7">
-           <property name="bottomMargin">
-            <number>8</number>
-           </property>
-           <item row="0" column="0">
-            <widget class="QFrame" name="searchFrame">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_7">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="searchTitle">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>70</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Search Page</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QFrame" name="searchArea">
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </widget>
            </item>
           </layout>

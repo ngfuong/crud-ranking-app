@@ -1,0 +1,47 @@
+.QLineEdit {
+    padding-left: 20;
+    border-radius: 10%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #000;
+}
+
+.QLineEdit:focus {
+    border-color: #f26419;
+}
+
+.QPushButton {
+    background-color: #f26419;
+    border: none;
+    border-radius: 10%;
+    color: #fff;
+    font-weight: 700;
+}
+
+.QLabel {
+    font-weight: bold;
+}
+
+#title {
+    color: #f26419;
+}
+
+#left_label {
+    color: #919191
+}
+
+#title{
+    color: #f26419;
+}
+
+#right_button {
+    background-color: none;
+    border:none;
+    color: #5551ff;
+    padding-top: 1px;
+}
+
+#right_button:hover {
+    text-decoration: underline;
+    text-decoration-color: #5551ff
+}
